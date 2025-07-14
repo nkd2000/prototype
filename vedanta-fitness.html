@@ -1,0 +1,938 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="वेदांत फिटनेस सेंटर - सेंजबहार, रायपुर में योग, जुम्बा, और व्यक्तिगत प्रशिक्षण के साथ स्वस्थ जीवनशैली अपनाएं।">
+  <meta name="keywords" content="फिटनेस, जिम, योग, जुम्बा, रायपुर, सेंजबहार, स्वास्थ्य">
+  <title>Vedant Fitness Centre - सेंजबहार, रायपुर</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #e74c3c;
+      --secondary: #3498db;
+      --dark: #2c3e50;
+      --light: #ecf0f1;
+      --accent: #f39c12;
+      --success: #27ae60;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      color: #333;
+      overflow-x: hidden;
+    }
+    
+    /* Header & Navigation */
+    .navbar {
+      background: rgba(44, 62, 80, 0.95) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 15px 0;
+      transition: all 0.4s ease;
+    }
+    
+    .navbar-brand {
+      font-weight: 700;
+      color: white !important;
+      font-size: 1.8rem;
+    }
+    
+    .navbar-brand span {
+      color: var(--primary);
+    }
+    
+    .nav-link {
+      color: rgba(255, 255, 255, 0.85) !important;
+      font-weight: 500;
+      margin: 0 10px;
+      padding: 8px 15px !important;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link:hover::before, .nav-link.active::before {
+      width: 100%;
+      left: 0;
+    }
+    
+    .nav-link:hover, .nav-link.active {
+      color: white !important;
+    }
+    
+    .navbar-toggler {
+      border: none;
+      color: white;
+    }
+    
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                  url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: white;
+      padding: 120px 20px 80px;
+      text-align: center;
+      position: relative;
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .hero img {
+      max-width: 150px;
+      margin-bottom: 25px;
+      filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+    }
+    
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    
+    .hero .lead {
+      font-size: 1.5rem;
+      margin-bottom: 35px;
+      opacity: 0.9;
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      border: none;
+      padding: 12px 30px;
+      font-weight: 600;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+      margin: 0 10px 15px;
+    }
+    
+    .btn-primary:hover {
+      background: #c0392b;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+    }
+    
+    .btn-outline-light {
+      border: 2px solid white;
+      background: transparent;
+      padding: 12px 30px;
+      font-weight: 600;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-outline-light:hover {
+      background: white;
+      color: var(--dark);
+      transform: translateY(-3px);
+    }
+    
+    /* Announcement */
+    .announcement {
+      background: linear-gradient(135deg, var(--secondary) 0%, #2980b9 100%);
+      color: white;
+      padding: 25px 20px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .announcement::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 0;
+      width: 100%;
+      height: 10px;
+      background: linear-gradient(90deg, var(--accent), var(--primary));
+    }
+    
+    .announcement h2 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .announcement-icon {
+      font-size: 2.5rem;
+      animation: pulse 2s infinite;
+    }
+    
+    /* Class Timings */
+    .section {
+      padding: 80px 20px;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+      position: relative;
+    }
+    
+    .section-title h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--dark);
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+    
+    .section-title h2::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: var(--primary);
+      margin: 15px auto;
+      border-radius: 10px;
+    }
+    
+    .time-icon {
+      font-size: 2rem;
+      color: var(--primary);
+      background: rgba(231, 76, 60, 0.1);
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin-right: 20px;
+      transition: all 0.3s ease;
+    }
+    
+    .class-time {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+      border-left: 5px solid var(--success);
+    }
+    
+    .class-time:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      border-left: 5px solid var(--primary);
+    }
+    
+    .class-time:hover .time-icon {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .class-content h5 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+    
+    .class-content p {
+      margin-bottom: 0;
+      font-size: 1.1rem;
+      color: #666;
+    }
+    
+    .highlight-box {
+      background: linear-gradient(135deg, var(--accent) 0%, #e67e22 100%);
+      color: white;
+      border-radius: 15px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      margin-top: 30px;
+    }
+    
+    .highlight-box p {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin: 0;
+    }
+    
+    /* Contact Section */
+    .contact-section {
+      background: var(--light);
+    }
+    
+    .contact-card {
+      background: white;
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .contact-item {
+      display: flex;
+      margin-bottom: 25px;
+      align-items: flex-start;
+    }
+    
+    .contact-icon {
+      font-size: 1.8rem;
+      color: var(--secondary);
+      background: rgba(52, 152, 219, 0.1);
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin-right: 20px;
+    }
+    
+    .contact-info h4 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+    
+    .contact-info p {
+      margin-bottom: 0;
+      font-size: 1.1rem;
+    }
+    
+    .contact-info a {
+      text-decoration: none;
+      color: var(--secondary);
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .contact-info a:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+    
+    /* Contact Form */
+    .contact-form {
+      margin-top: 40px;
+    }
+    
+    .form-control {
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      padding: 12px;
+      font-size: 1rem;
+    }
+    
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 0.2rem rgba(231, 76, 60, 0.25);
+    }
+    
+    .btn-submit {
+      background: var(--success);
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-submit:hover {
+      background: #219150;
+      transform: translateY(-3px);
+    }
+    
+    /* Testimonials Carousel */
+    .testimonial-carousel {
+      padding: 0 50px;
+    }
+    
+    .carousel-control-prev, .carousel-control-next {
+      width: 40px;
+      height: 40px;
+      background: var(--primary);
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+      background-size: 50% 50%;
+    }
+    
+    /* Footer */
+    .footer {
+      background: var(--dark);
+      color: white;
+      padding: 60px 0 30px;
+    }
+    
+    .footer-logo {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    
+    .footer-logo span {
+      color: var(--primary);
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .social-link {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .social-link:hover {
+      background: var(--primary);
+      transform: scale(1.1);
+    }
+    
+    .footer-links h5 {
+      font-size: 1.3rem;
+      margin-bottom: 25px;
+    }
+    
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-links a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: white;
+      padding-left: 5px;
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      margin-top: 50px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+    
+    /* Scroll Top Button */
+    .scroll-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      display: none;
+      font-size: 22px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      width: 55px;
+      height: 55px;
+      text-align: center;
+      line-height: 55px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+    
+    .scroll-top:hover {
+      background: #c0392b;
+      transform: translateY(-5px);
+    }
+    
+    /* Animations */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 992px) {
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+      .hero .lead {
+        font-size: 1.3rem;
+      }
+      .section-title h2 {
+        font-size: 2.2rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .hero {
+        padding: 100px 20px 60px;
+      }
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+      .class-time {
+        flex-direction: column;
+        text-align: center;
+      }
+      .time-icon {
+        margin: 0 auto 15px;
+      }
+      .contact-item {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+      }
+      .contact-icon {
+        margin: 0 auto 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <i class="fas fa-dumbbell me-2"></i>वेदांत<span>फिटनेस</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#home">होम</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#classes">क्लासेस</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#testimonials">समीक्षाएँ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">संपर्क</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-primary" href="#contact">अभी जुड़ें</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-content animate-on-scroll">
+      <img src="https://i.ibb.co/qJ5VjL5/gym-icon.png" alt="Vedant Fitness Logo" class="img-fluid">
+      <h1>Vedant Fitness Centre</h1>
+      <p class="lead">सेंजबहार - रायपुर</p>
+      <div class="mt-4">
+        <a href="#classes" class="btn btn-primary"><i class="fas fa-calendar-check me-2"></i>क्लास शेड्यूल</a>
+        <a href="#contact" class="btn btn-outline-light"><i class="fas fa-phone-alt me-2"></i>अभी कॉल करें</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Announcement -->
+  <section class="announcement">
+    <h2><i class="fas fa-bullhorn announcement-icon"></i> नई सुविधा शुरू!</h2>
+    <p class="h5">
+      वेदांत फिटनेस जिम में अब से योग एवं जुम्बा क्लासेस शुरू हो चुकी हैं। जो भी सदस्य या नए लोग इन क्लासेस को जॉइन करना चाहते हैं, वे आज से ही भाग ले सकते हैं।
+    </p>
+  </section>
+
+  <!-- Class Timings -->
+  <section class="section" id="classes">
+    <div class="container">
+      <div class="section-title animate-on-scroll">
+        <h2><i class="fas fa-clock me-2"></i> कक्षा समय सारिणी</h2>
+        <p class="text-muted">हमारे विशेषज्ञ प्रशिक्षकों के साथ व्यक्तिगत प्रशिक्षण प्राप्त करें</p>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6 animate-on-scroll">
+          <div class="class-time">
+            <div class="time-icon">
+              <i class="fas fa-person-praying"></i>
+            </div>
+            <div class="class-content">
+              <h5>योगा क्लास</h5>
+              <p>सुबह 6:00 बजे से 7:00 बजे तक</p>
+              <small class="text-success"><i class="fas fa-user-tie me-1"></i> शिक्षक: योगेश शर्मा</small>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6 animate-on-scroll">
+          <div class="class-time">
+            <div class="time-icon">
+              <i class="fas fa-dumbbell"></i>
+            </div>
+            <div class="class-content">
+              <h5>जुंबा क्लास</h5>
+              <p>सुबह 7:00 बजे से 8:00 बजे तक</p>
+              <small class="text-success"><i class="fas fa-user-tie me-1"></i> शिक्षक: प्रिया सिंह</small>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6 animate-on-scroll">
+          <div class="class-time">
+            <div class="time-icon">
+              <i class="fas fa-running"></i>
+            </div>
+            <div class="class-content">
+              <h5>जिम समय (सुबह)</h5>
+              <p>सुबह 6:00 बजे से 11:00 बजे तक</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6 animate-on-scroll">
+          <div class="class-time">
+            <div class="time-icon">
+              <i class="fas fa-moon"></i>
+            </div>
+            <div class="class-content">
+              <h5>जिम समय (शाम)</h5>
+              <p>शाम 4:00 बजे से 9:00 बजे तक</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="highlight-box animate-on-scroll">
+        <p>स्वस्थ शरीर और प्रसन्न मन के लिए आज ही जुड़ें वेदांत फिटनेस सेंटर से!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Carousel -->
+  <section class="section bg-light" id="testimonials">
+    <div class="container">
+      <div class="section-title animate-on-scroll">
+        <h2><i class="fas fa-star me-2"></i> हमारे सदस्य क्या कहते हैं</h2>
+        <p class="text-muted">वेदांट फिटनेस के अनुभवों को साझा करते हुए</p>
+      </div>
+      
+      <div id="testimonialCarousel" class="carousel slide testimonial-carousel" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="testimonial-card">
+              <div class="testimonial-content">
+                "वेदांत फिटनेस में शामिल होने के बाद से मेरी फिटनेस यात्रा में काफी सुधार हुआ है। प्रशिक्षक बहुत जानकार और सहायक हैं।"
+              </div>
+              <div class="testimonial-author">
+                <div class="author-img">R</div>
+                <div class="author-info">
+                  <h5>राहुल वर्मा</h5>
+                  <p>सदस्य - 2 वर्ष</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="testimonial-card">
+              <div class="testimonial-content">
+                "योग कक्षाएं जीवन बदलने वाली हैं! योगेश सर की मार्गदर्शन में मैंने न सिर्फ लचीलापन बढ़ाया बल्कि तनाव भी कम किया।"
+              </div>
+              <div class="testimonial-author">
+                <div class="author-img">P</div>
+                <div class="author-info">
+                  <h5>प्रियंका मिश्रा</h5>
+                  <p>योग सदस्य</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="testimonial-card">
+              <div class="testimonial-content">
+                "जुम्बा कक्षाएं बहुत मजेदार हैं! प्रिया मैम के उत्साह और ऊर्जा से पूरा वातावरण सकारात्मक हो जाता है। हर दिन नई ऊर्जा मिलती है।"
+              </div>
+              <div class="testimonial-author">
+                <div class="author-img">A</div>
+                <div class="author-info">
+                  <h5>अंजलि साहू</h5>
+                  <p>जुम्बा सदस्य</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Location -->
+  <section class="section contact-section" id="contact">
+    <div class="container">
+      <div class="section-title animate-on-scroll">
+        <h2><i class="fas fa-map-marker-alt me-2"></i> हमसे संपर्क करें</h2>
+        <p class="text-muted">हम आपके फिटनेस सफर में मदद करने के लिए यहाँ हैं</p>
+      </div>
+      
+      <div class="contact-card animate-on-scroll">
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div class="contact-info">
+            <h4>स्थान</h4>
+            <p>वेदांत फिटनेस जिम, सेंजबहार, रायपुर, छत्तीसगढ़ 492001</p>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fas fa-phone-alt"></i>
+          </div>
+          <div class="contact-info">
+            <h4>फोन नंबर</h4>
+            <p>
+              <a href="tel:7987100599">7987100599</a> / 
+              <a href="tel:9977318820">9977318820</a>
+            </p>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="contact-info">
+            <h4>ईमेल</h4>
+            <p>
+              <a href="mailto:info@vedantfitness.com">info@vedantfitness.com</a>
+            </p>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div class="contact-info">
+            <h4>ऑपरेटिंग घंटे</h4>
+            <p>सोमवार से शनिवार: सुबह 6:00 बजे - रात 9:00 बजे<br>रविवार: सुबह 7:00 बजे - दोपहर 12:00 बजे</p>
+          </div>
+        </div>
+        
+        <!-- Contact Form -->
+        <div class="contact-form animate-on-scroll">
+          <h4 class="mb-4">हमें एक संदेश भेजें</h4>
+          <form>
+            <div class="mb-3">
+              <input type="text" class="form-control" placeholder="आपका नाम" required>
+            </div>
+            <div class="mb-3">
+              <input type="email" class="form-control" placeholder="आपका ईमेल" required>
+            </div>
+            <div class="mb-3">
+              <textarea class="form-control" rows="4" placeholder="आपका संदेश" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-submit">भेजें</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-5 mb-lg-0">
+          <div class="footer-logo">वेदांत<span>फिटनेस</span></div>
+          <p>स्वस्थ शरीर और प्रसन्न मन के लिए आपका गंतव्य। हमारे विशेषज्ञ प्रशिक्षकों और आधुनिक सुविधाओं के साथ अपने फिटनेस लक्ष्यों को प्राप्त करें।</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 mb-5 mb-lg-0">
+          <div class="footer-links">
+            <h5>जल्दी लिंक</h5>
+            <ul>
+              <li><a href="#home"><i class="fas fa-chevron-right me-2"></i>होम</a></li>
+              <li><a href="#classes"><i class="fas fa-chevron-right me-2"></i>क्लासेस</a></li>
+              <li><a href="#testimonials"><i class="fas fa-chevron-right me-2"></i>समीक्षाएँ</a></li>
+              <li><a href="#contact"><i class="fas fa-chevron-right me-2"></i>संपर्क</a></li>
+              <li><a href="#"><i class="fas fa-chevron-right me-2"></i>सदस्यता योजनाएँ</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="col-lg-4">
+          <div class="footer-links">
+            <h5>हमारी सेवाएँ</h5>
+            <ul>
+              <li><a href="#"><i class="fas fa-chevron-right me-2"></i>व्यक्तिगत प्रशिक्षण</a></li>
+              <li><a href="#"><i class="fas fa-chevron-right me-2"></i>योग कक्षाएं</a></li>
+              <li><a href="#"><i class="fas fa-chevron-right me-2"></i>जुम्बा कक्षाएं</a></li>
+              <li><a href="#"><i class="fas fa-chevron-right me-2"></i>वजन प्रबंधन</a></li>
+              <li><a href="#"><i class="fas fa-chevron-right me-2"></i>पोषण परामर्श</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        © 2023 वेदांत फिटनेस सेंटर. सर्वाधिकार सुरक्षित। डिज़ाइन किया गया <i class="fas fa-heart text-danger"></i> सेंजबहार, रायपुर में
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Top Button -->
+  <div class="scroll-top" onclick="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Scroll to top button
+    const scrollTopBtn = document.querySelector('.scroll-top');
+    window.onscroll = () => {
+      scrollTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+    };
+    
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+    
+    // Animation on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    });
+    
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
