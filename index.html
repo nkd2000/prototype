@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translation="pageTitle">Prototype Webpages</title>
+    <meta name="description" data-translation="metaDescription" content="Discover our innovative prototype webpages designed for your needs.">
+    <meta name="keywords" content="prototype webpages, web design, bilingual, responsive">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            padding: 1.5rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffd700;
+        }
+
+        .language-switcher button {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+
+        .language-switcher button.active {
+            background: #ffd700;
+            color: #333;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.8rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        .hero {
+            height: 100vh;
+            background: url('https://source.unsplash.com/random/1920x1080?tech') no-repeat center/cover;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .typed-text {
+            font-size: 2rem;
+            color: #ffd700;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 2rem;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background: #0056b3;
+        }
+
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .about {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .prototypes {
+            background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+        }
+
+        .filter-buttons {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            margin: 0.5rem;
+            border: none;
+            background: #e0e0e0;
+            color: #333;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active {
+            background: #007bff;
+            color: white;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #007bff;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        footer a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-wrap: wrap;
+                padding: 1rem;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            nav, .language-switcher {
+                display: none;
+                width: 100%;
+            }
+
+            nav.active, .language-switcher.active {
+                display: block;
+                padding: 1rem 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .typed-text {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">ProtoHub</div>
+        <div class="hamburger">☰</div>
+        <nav>
+            <ul>
+                <li><a href="#" data-translation="navHome">Home</a></li>
+                <li><a href="#prototypes" data-translation="navPrototypes">Prototypes</a></li>
+                <li><a href="#contact" data-translation="navContact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="language-switcher">
+            <button data-lang="en" class="active">English</button>
+            <button data-lang="hi">हिन्दी</button>
+        </div>
+    </header>
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1 data-translation="headline">Welcome to Our Prototype Showcase</h1>
+                <p><span class="typed-text"></span></p>
+                <a href="#prototypes" class="btn" data-translation="exploreNow">Explore Now</a>
+            </div>
+        </section>
+        <section class="section about">
+            <h2 data-translation="aboutTitle">Who We Are</h2>
+            <p data-translation="aboutDescription">We craft cutting-edge webpage prototypes tailored to your vision.</p>
+        </section>
+        <section id="prototypes" class="section prototypes">
+            <h2 data-translation="prototypesTitle">Our Prototypes</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="business">Business</button>
+                <button class="filter-btn" data-filter="ecommerce">E-commerce</button>
+            </div>
+            <div class="grid">
+                <div class="card" data-category="business">
+                    <img src="https://via.placeholder.com/300x200?text=Business" data-translation="proto1_alt" alt="Business Prototype">
+                    <div class="card-content">
+                        <h2 data-translation="proto1_title">Business Landing</h2>
+                        <p data-translation="proto1_desc">A sleek design for corporate needs.</p>
+                        <a href="https://example.com/proto1" target="_blank" data-translation="viewDemo">View Demo</a>
+                    </div>
+                </div>
+                <div class="card" data-category="ecommerce">
+                    <img src="https://via.placeholder.com/300x200?text=E-commerce" data-translation="proto2_alt" alt="E-commerce Prototype">
+                    <div class="card-content">
+                        <h2 data-translation="proto2_title">Online Store</h2>
+                        <p data-translation="proto2_desc">A modern e-commerce solution.</p>
+                        <a href="https://example.com/proto2" target="_blank" data-translation="viewDemo">View Demo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer id="contact">
+        <p><i class="fas fa-envelope"></i> <span data-translation="contactEmail">contact@protohub.com</span></p>
+        <p><i class="fas fa-phone"></i> <span data-translation="contactPhone">+91 987-654-3210</span></p>
+        <p><a href="#" data-translation="backToTop">Back to Top</a></p>
+    </footer>
+    <script>
+        const translations = {
+            pageTitle: { en: "Prototype Webpages", hi: "प्रोटोटाइप वेबपेज" },
+            metaDescription: { en: "Discover our innovative prototype webpages designed for your needs.", hi: "आपकी जरूरतों के लिए डिज़ाइन किए गए हमारे नवीन प्रोटोटाइप वेबपेजों को जानें।" },
+            navHome: { en: "Home", hi: "होम" },
+            navPrototypes: { en: "Prototypes", hi: "प्रोटोटाइप" },
+            navContact: { en: "Contact", hi: "संपर्क" },
+            headline: { en: "Welcome to Our Prototype Showcase", hi: "हमारे प्रोटोटाइप प्रदर्शन में आपका स्वागत है" },
+            exploreNow: { en: "Explore Now", hi: "अभी देखें" },
+            aboutTitle: { en: "Who We Are", hi: "हम कौन हैं" },
+            aboutDescription: { en: "We craft cutting-edge webpage prototypes tailored to your vision.", hi: "हम आपकी दृष्टि के अनुसार अत्याधुनिक वेबपेज प्रोटोटाइप बनाते हैं।" },
+            prototypesTitle: { en: "Our Prototypes", hi: "हमारे प्रोटोटाइप" },
+            proto1_title: { en: "Business Landing", hi: "व्यापार लैंडिंग" },
+            proto1_desc: { en: "A sleek design for corporate needs.", hi: "कॉर्पोरेट जरूरतों के लिए एक आकर्षक डिज़ाइन।" },
+            proto1_alt: { en: "Business Prototype", hi: "व्यापार प्रोटोटाइप" },
+            proto2_title: { en: "Online Store", hi: "ऑनलाइन स्टोर" },
+            proto2_desc: { en: "A modern e-commerce solution.", hi: "एक आधुनिक ई-कॉमर्स समाधान।" },
+            proto2_alt: { en: "E-commerce Prototype", hi: "ई-कॉमर्स प्रोटोटाइप" },
+            viewDemo: { en: "View Demo", hi: "डेमो देखें" },
+            contactEmail: { en: "contact@protohub.com", hi: "contact@protohub.com" },
+            contactPhone: { en: "+91 987-654-3210", hi: "+91 987-654-3210" },
+            backToTop: { en: "Back to Top", hi: "शीर्ष पर वापस" }
+        };
+
+        function setLanguage(lang) {
+            document.querySelectorAll('[data-translation]').forEach(el => {
+                const key = el.getAttribute('data-translation');
+                if (el.tagName === 'IMG') el.alt = translations[key][lang];
+                else el.textContent = translations[key][lang];
+            });
+            document.title = translations.pageTitle[lang];
+            document.querySelector('meta[name="description"]').setAttribute('content', translations.metaDescription[lang]);
+            document.querySelectorAll('.language-switcher button').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+            });
+        }
+
+        document.querySelectorAll('.language-switcher button').forEach(btn => {
+            btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
+        });
+
+        const hamburger = document.querySelector('.hamburger');
+        const nav = document.querySelector('nav');
+        const langSwitcher = document.querySelector('.language-switcher');
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            langSwitcher.classList.toggle('active');
+        });
+
+        const typed = new Typed('.typed-text', {
+            strings: ['Innovative Designs', 'Responsive Solutions', 'Your Vision, Our Code'],
+            typeSpeed: 50,
+            backSpeed: 30,
+            loop: true
+        });
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.getAttribute('data-filter');
+                document.querySelectorAll('.card').forEach(card => {
+                    card.style.display = filter === 'all' || card.getAttribute('data-category') === filter ? 'block' : 'none';
+                });
+            });
+        });
+
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        sections.forEach(section => observer.observe(section));
+
+        setLanguage('en');
+    </script>
+</body>
+</html>
