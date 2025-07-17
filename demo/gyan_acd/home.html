@@ -2,87 +2,188 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Prototype Models</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototype Models - Mobile Friendly</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
         .container {
-            max-width: 900px;
-            margin: 40px auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
         }
-        .models {
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
             display: flex;
-            flex-wrap: wrap;
-            gap: 24px;
+            justify-content: space-between;
+            align-items: center;
         }
-        .model-card {
-            flex: 1 1 220px;
-            background: #e9ecef;
-            border-radius: 6px;
-            padding: 20px;
-            text-align: center;
-            transition: box-shadow 0.2s;
-        }
-        .model-card:hover {
-            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-        }
-        .model-title {
-            font-size: 1.2em;
-            margin-bottom: 10px;
-        }
-        .model-link {
-            display: inline-block;
-            margin-top: 12px;
-            padding: 8px 18px;
-            background: #007bff;
-            color: #fff;
-            border-radius: 4px;
-            text-decoration: none;
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.4rem;
             font-weight: bold;
         }
-        .model-link:hover {
-            background: #0056b3;
+
+        .logo i {
+            color: #f59e0b;
         }
-        
-        .tour-box {
-            background: #fff;
+
+        .mobile-menu-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Note Banner */
+        .note-banner {
+            background-color: #fee2e2;
+            border: 1px solid #ef4444;
             border-radius: 8px;
-            padding: 20px;
-            margin: 20px auto;
-            max-width: 900px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 15px;
+            margin: 20px 0;
         }
-        
+
+        .note-banner strong {
+            color: #b91c1c;
+        }
+
+        .note-banner i {
+            color: #444;
+        }
+
+        /* Tour Box */
+        .tour-box {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .tour-box h2 {
+            color: #2563eb;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
         .tour-step {
             display: flex;
-            align-items: start;
+            align-items: flex-start;
             margin-bottom: 15px;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 6px;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 8px;
         }
-        
+
         .step-number {
-            background: #007bff;
+            background: #2563eb;
             color: white;
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-right: 15px;
             flex-shrink: 0;
+            font-weight: bold;
         }
 
+        /* Models Grid */
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .model-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .model-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .model-image {
+            height: 180px;
+            overflow: hidden;
+            background: linear-gradient(45deg, #3b82f6, #60a5fa);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 5rem;
+        }
+
+        .model-content {
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .model-title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+
+        .model-desc {
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+
+        .model-link {
+            display: block;
+            text-align: center;
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+
+        .model-link:hover {
+            background: #1d4ed8;
+        }
+
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -90,145 +191,316 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.5);
+            background-color: rgba(0, 0, 0, 0.7);
             z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
         }
 
         .modal-content {
             background-color: white;
-            margin: 15% auto;
-            padding: 20px;
-            border-radius: 8px;
-            width: 80%;
+            border-radius: 12px;
+            width: 100%;
             max-width: 500px;
             position: relative;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+        }
+
+        .modal-body {
+            padding: 25px;
         }
 
         .close {
             position: absolute;
-            right: 15px;
-            top: 10px;
-            font-size: 24px;
+            top: 15px;
+            right: 20px;
+            font-size: 1.8rem;
             cursor: pointer;
+            color: white;
         }
 
         .option-btn {
             display: block;
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
+            padding: 14px;
+            margin: 12px 0;
             border: none;
-            border-radius: 4px;
-            background: #007bff;
+            border-radius: 8px;
+            background: #2563eb;
             color: white;
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
+            transition: background 0.3s;
         }
 
         .option-btn:hover {
-            background: #0056b3;
+            background: #1d4ed8;
         }
 
         .feedback-form {
             display: none;
+            animation: fadeIn 0.3s;
         }
 
-        .feedback-input {
+        .feedback-input, #modelChoice {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
+            padding: 12px 15px;
+            margin: 12px 0;
             border: 1px solid #ddd;
-            border-radius: 4px;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        textarea.feedback-input {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1e293b;
+            color: #cbd5e1;
+            padding: 30px 0;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .footer p {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 15px;
+            }
+            
+            .logo {
+                font-size: 1.2rem;
+            }
+            
+            .models-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tour-step {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .step-number {
+                margin-bottom: 10px;
+            }
+            
+            .modal-body {
+                padding: 20px;
+            }
+            
+            .model-image {
+                height: 150px;
+                font-size: 4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .note-banner {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+            
+            .tour-box {
+                padding: 15px;
+            }
+            
+            .tour-box h2 {
+                font-size: 1.3rem;
+            }
+            
+            .model-content {
+                padding: 15px;
+            }
+            
+            .model-title {
+                font-size: 1.3rem;
+            }
+            
+            .model-link {
+                padding: 10px;
+                font-size: 0.95rem;
+            }
+            
+            .option-btn {
+                padding: 12px;
+                font-size: 0.95rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div style="border: 1px solid red; margin-top: 2em; padding: 1em;">
-        <p><strong style="color: rgb(127, 5, 5);">Note:</strong>
-        <i>सभी मॉडेल को एक एक करके चेक करे जो भी मॉडेल आपको पसंद आए अपने लिए तो उसका लिंक हमे मैसेज करे। </i></p>
-        
-        
-    </div>
-    <div class="tour-box">
-        <h2 style="color: #007bff; margin-bottom: 15px;">How to Use This Site</h2>
-        <div class="tour-step">
-            <div class="step-number">1</div>
-            <div>Browse through our three prototype models (A, B, and C). Each model has different features and layouts.</div>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-cubes"></i>
+                <span>Prototype Models</span>
+            </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
-        <div class="tour-step">
-            <div class="step-number">2</div>
-            <div>Click on "Go to Model" buttons to preview each design in detail and explore their unique features.</div>
-        </div>
-        <div class="tour-step">
-            <div class="step-number">3</div>
-            <div>Use the navigation menus within each model to explore different sections like courses, subjects, and contact information.</div>
-        </div>
-        <div class="tour-step">
-            <div class="step-number">4</div>
-            <div>Once you find a model you like, copy its link and send it to us as mentioned in the note above.</div>
-        </div>
-    </div>
+    </header>
+
     <div class="container">
-        <h1>Prototype Models</h1>
-        <div class="models">
+        <!-- Note Banner -->
+        <div class="note-banner">
+            <p><strong>Note:</strong>
+            <i>सभी मॉडेल को एक एक करके चेक करे जो भी मॉडेल आपको पसंद आए अपने लिए तो उसका लिंक हमे मैसेज करे।</i></p>
+        </div>
+
+        <!-- Tour Box -->
+        <div class="tour-box">
+            <h2>How to Use This Site</h2>
+            <div class="tour-step">
+                <div class="step-number">1</div>
+                <div>Browse through our three prototype models (A, B, and C). Each model has different features and layouts.</div>
+            </div>
+            <div class="tour-step">
+                <div class="step-number">2</div>
+                <div>Click on "Go to Model" buttons to preview each design in detail and explore their unique features.</div>
+            </div>
+            <div class="tour-step">
+                <div class="step-number">3</div>
+                <div>Use the navigation menus within each model to explore different sections like courses, subjects, and contact information.</div>
+            </div>
+            <div class="tour-step">
+                <div class="step-number">4</div>
+                <div>Once you find a model you like, copy its link and send it to us as mentioned in the note above.</div>
+            </div>
+        </div>
+
+        <!-- Models Grid -->
+        <h1 style="margin: 25px 0 10px; color: #1e293b;">Available Prototypes</h1>
+        <p style="color: #64748b; margin-bottom: 20px;">Select a model to preview its design and features</p>
+        
+        <div class="models-grid">
             <div class="model-card">
-                <div class="model-title">Model A</div>
-                <p>A clean and modern design with essential features. Perfect for academies focusing on core educational content with a straightforward layout.</p>
-                <a class="model-link" href="model_a.html">Go to Model A</a>
+                <div class="model-image">
+                    <i class="fas fa-paint-brush"></i>
+                </div>
+                <div class="model-content">
+                    <h3 class="model-title">Model A</h3>
+                    <p class="model-desc">A clean and modern design with essential features. Perfect for academies focusing on core educational content with a straightforward layout.</p>
+                    <a class="model-link" href="model_a.html">
+                        <i class="fas fa-eye"></i> Preview Model A
+                    </a>
+                </div>
             </div>
+            
             <div class="model-card">
-                <div class="model-title">Model B</div>
-                <p>Interactive design with advanced filtering and FAQ section. Features smooth animations and a live chat widget for better user engagement.</p>
-                <a class="model-link" href="model_b.html">Go to Model B</a>
+                <div class="model-image">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <div class="model-content">
+                    <h3 class="model-title">Model B</h3>
+                    <p class="model-desc">Interactive design with advanced filtering and FAQ section. Features smooth animations and a live chat widget for better user engagement.</p>
+                    <a class="model-link" href="model_b.html">
+                        <i class="fas fa-eye"></i> Preview Model B
+                    </a>
+                </div>
             </div>
+            
             <div class="model-card">
-                <div class="model-title">Model C</div>
-                <p>Premium design with multi-user dashboard system. Includes separate portals for parents, tutors, and admins with comprehensive management features.</p>
-                <a class="model-link" href="model_c.html">Go to Model C</a>
+                <div class="model-image">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="model-content">
+                    <h3 class="model-title">Model C</h3>
+                    <p class="model-desc">Premium design with multi-user dashboard system. Includes separate portals for parents, tutors, and admins with comprehensive management features.</p>
+                    <a class="model-link" href="model_c.html">
+                        <i class="fas fa-eye"></i> Preview Model C
+                    </a>
+                </div>
             </div>
-            <div class="model-card" style="display: none;">
-                <div class="model-title">Model D</div>
-                <p>Short description of Model D.</p>
-                <a class="model-link" href="model_d.html" >Go to Model D</a>
-            </div>
-            <div class="model-card" style="display: none;">
-                <div class="model-title">Model E</div>
-                <p>Short description of Model E.</p>
-                <a class="model-link" href="model_e.html">Go to Model E</a>
-            </div>
-            <!-- Add more models as needed -->
         </div>
     </div>
 
+    <!-- Feedback Modal -->
     <div id="feedbackModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>आपकी प्रतिक्रिया</h2>
+            <div class="modal-header">
+                <h2>आपकी प्रतिक्रिया</h2>
+                <span class="close">&times;</span>
+            </div>
             
-            <div id="mainOptions">
-                <button class="option-btn" onclick="showModelSelection()">मैं एक मॉडल ऑर्डर करना चाहता हूं</button>
-                <button class="option-btn" onclick="showSuggestionForm()">मैं सुझाव देना चाहता हूं</button>
-                <button class="option-btn" onclick="closeAndRemind()">बाद में</button>
-            </div>
+            <div class="modal-body">
+                <div id="mainOptions">
+                    <button class="option-btn" onclick="showModelSelection()">
+                        <i class="fas fa-shopping-cart"></i> मैं एक मॉडल ऑर्डर करना चाहता हूं
+                    </button>
+                    <button class="option-btn" onclick="showSuggestionForm()">
+                        <i class="fas fa-lightbulb"></i> मैं सुझाव देना चाहता हूं
+                    </button>
+                    <button class="option-btn" onclick="closeAndRemind()" style="background: #64748b;">
+                        <i class="fas fa-clock"></i> बाद में
+                    </button>
+                </div>
 
-            <div id="modelSelection" class="feedback-form">
-                <h3>कृपया एक मॉडल चुनें:</h3>
-                <select id="modelChoice" class="feedback-input">
-                    <option value="Model A">Model A</option>
-                    <option value="Model B">Model B</option>
-                    <option value="Model C">Model C</option>
-                </select>
-                <button class="option-btn" onclick="sendModelChoice()">भेजें</button>
-                <button class="option-btn" onclick="showMainOptions()">वापस जाएं</button>
-            </div>
+                <div id="modelSelection" class="feedback-form">
+                    <h3 style="margin-bottom: 15px;">कृपया एक मॉडल चुनें:</h3>
+                    <select id="modelChoice" class="feedback-input">
+                        <option value="Model A">Model A</option>
+                        <option value="Model B">Model B</option>
+                        <option value="Model C">Model C</option>
+                    </select>
+                    <button class="option-btn" onclick="sendModelChoice()">
+                        <i class="fas fa-paper-plane"></i> भेजें
+                    </button>
+                    <button class="option-btn" onclick="showMainOptions()" style="background: #64748b;">
+                        <i class="fas fa-arrow-left"></i> वापस जाएं
+                    </button>
+                </div>
 
-            <div id="suggestionForm" class="feedback-form">
-                <h3>अपना सुझाव यहां लिखें:</h3>
-                <textarea id="suggestionText" class="feedback-input" rows="4"></textarea>
-                <button class="option-btn" onclick="sendSuggestion()">सुझाव भेजें</button>
-                <button class="option-btn" onclick="showMainOptions()">वापस जाएं</button>
+                <div id="suggestionForm" class="feedback-form">
+                    <h3 style="margin-bottom: 15px;">अपना सुझाव यहां लिखें:</h3>
+                    <textarea id="suggestionText" class="feedback-input" placeholder="Type your suggestion here..."></textarea>
+                    <button class="option-btn" onclick="sendSuggestion()">
+                        <i class="fas fa-paper-plane"></i> सुझाव भेजें
+                    </button>
+                    <button class="option-btn" onclick="showMainOptions()" style="background: #64748b;">
+                        <i class="fas fa-arrow-left"></i> वापस जाएं
+                    </button>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2023 Prototype Models. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script>
         let visitedModels = new Set();
@@ -237,23 +509,24 @@
         // Track model visits
         document.querySelectorAll('.model-link').forEach(link => {
             link.addEventListener('click', function(e) {
-                e.preventDefault(); // Prevent default navigation
+                e.preventDefault();
                 const href = this.getAttribute('href');
                 visitedModels.add(href);
                 
-                // Open the model in a new tab
+                // Open model in new tab
                 window.open(href, '_blank');
                 
-                // Check if all models have been visited
+                // Show feedback modal if all models visited
                 if (visitedModels.size === 3) {
                     setTimeout(showFeedbackModal, 1000);
                 }
             });
         });
 
+        // Modal Functions
         function showFeedbackModal() {
             const modal = document.getElementById('feedbackModal');
-            modal.style.display = 'block';
+            modal.style.display = 'flex';
             showMainOptions();
         }
 
@@ -271,13 +544,14 @@
         function showSuggestionForm() {
             document.getElementById('mainOptions').style.display = 'none';
             document.getElementById('suggestionForm').style.display = 'block';
+            document.getElementById('suggestionText').focus();
         }
 
         function sendModelChoice() {
             const model = document.getElementById('modelChoice').value;
             const message = `Hello, I would like to order ${model} for my website.`;
             window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
-            document.getElementById('feedbackModal').style.display = 'none';
+            closeModal();
         }
 
         function sendSuggestion() {
@@ -288,26 +562,27 @@
             }
             const message = `Suggestion feedback: ${suggestion}`;
             window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
-            document.getElementById('feedbackModal').style.display = 'none';
+            closeModal();
         }
 
         function closeAndRemind() {
-            document.getElementById('feedbackModal').style.display = 'none';
+            closeModal();
             setTimeout(showFeedbackModal, 300000); // Show again after 5 minutes
         }
 
-        // Close modal when clicking the X
-        document.querySelector('.close').addEventListener('click', function() {
+        function closeModal() {
             document.getElementById('feedbackModal').style.display = 'none';
-        });
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('feedbackModal');
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
         }
+
+        // Event Listeners
+        document.querySelector('.close').addEventListener('click', closeModal);
+        
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('feedbackModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
     </script>
 </body>
 </html>
