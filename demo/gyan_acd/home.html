@@ -51,6 +51,94 @@
         .model-link:hover {
             background: #0056b3;
         }
+        
+        .tour-box {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 900px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .tour-step {
+            display: flex;
+            align-items: start;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+        
+        .step-number {
+            background: #007bff;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .option-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 4px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        .option-btn:hover {
+            background: #0056b3;
+        }
+
+        .feedback-form {
+            display: none;
+        }
+
+        .feedback-input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body>
@@ -59,6 +147,25 @@
         <i>सभी मॉडेल को एक एक करके चेक करे जो भी मॉडेल आपको पसंद आए अपने लिए तो उसका लिंक हमे मैसेज करे। </i></p>
         
         
+    </div>
+    <div class="tour-box">
+        <h2 style="color: #007bff; margin-bottom: 15px;">How to Use This Site</h2>
+        <div class="tour-step">
+            <div class="step-number">1</div>
+            <div>Browse through our three prototype models (A, B, and C). Each model has different features and layouts.</div>
+        </div>
+        <div class="tour-step">
+            <div class="step-number">2</div>
+            <div>Click on "Go to Model" buttons to preview each design in detail and explore their unique features.</div>
+        </div>
+        <div class="tour-step">
+            <div class="step-number">3</div>
+            <div>Use the navigation menus within each model to explore different sections like courses, subjects, and contact information.</div>
+        </div>
+        <div class="tour-step">
+            <div class="step-number">4</div>
+            <div>Once you find a model you like, copy its link and send it to us as mentioned in the note above.</div>
+        </div>
     </div>
     <div class="container">
         <h1>Prototype Models</h1>
@@ -91,5 +198,116 @@
             <!-- Add more models as needed -->
         </div>
     </div>
+
+    <div id="feedbackModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>आपकी प्रतिक्रिया</h2>
+            
+            <div id="mainOptions">
+                <button class="option-btn" onclick="showModelSelection()">मैं एक मॉडल ऑर्डर करना चाहता हूं</button>
+                <button class="option-btn" onclick="showSuggestionForm()">मैं सुझाव देना चाहता हूं</button>
+                <button class="option-btn" onclick="closeAndRemind()">बाद में</button>
+            </div>
+
+            <div id="modelSelection" class="feedback-form">
+                <h3>कृपया एक मॉडल चुनें:</h3>
+                <select id="modelChoice" class="feedback-input">
+                    <option value="Model A">Model A</option>
+                    <option value="Model B">Model B</option>
+                    <option value="Model C">Model C</option>
+                </select>
+                <button class="option-btn" onclick="sendModelChoice()">भेजें</button>
+                <button class="option-btn" onclick="showMainOptions()">वापस जाएं</button>
+            </div>
+
+            <div id="suggestionForm" class="feedback-form">
+                <h3>अपना सुझाव यहां लिखें:</h3>
+                <textarea id="suggestionText" class="feedback-input" rows="4"></textarea>
+                <button class="option-btn" onclick="sendSuggestion()">सुझाव भेजें</button>
+                <button class="option-btn" onclick="showMainOptions()">वापस जाएं</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let visitedModels = new Set();
+        const whatsappNumber = "+916261225135";
+
+        // Track model visits
+        document.querySelectorAll('.model-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault(); // Prevent default navigation
+                const href = this.getAttribute('href');
+                visitedModels.add(href);
+                
+                // Open the model in a new tab
+                window.open(href, '_blank');
+                
+                // Check if all models have been visited
+                if (visitedModels.size === 3) {
+                    setTimeout(showFeedbackModal, 1000);
+                }
+            });
+        });
+
+        function showFeedbackModal() {
+            const modal = document.getElementById('feedbackModal');
+            modal.style.display = 'block';
+            showMainOptions();
+        }
+
+        function showMainOptions() {
+            document.getElementById('mainOptions').style.display = 'block';
+            document.getElementById('modelSelection').style.display = 'none';
+            document.getElementById('suggestionForm').style.display = 'none';
+        }
+
+        function showModelSelection() {
+            document.getElementById('mainOptions').style.display = 'none';
+            document.getElementById('modelSelection').style.display = 'block';
+        }
+
+        function showSuggestionForm() {
+            document.getElementById('mainOptions').style.display = 'none';
+            document.getElementById('suggestionForm').style.display = 'block';
+        }
+
+        function sendModelChoice() {
+            const model = document.getElementById('modelChoice').value;
+            const message = `Hello, I would like to order ${model} for my website.`;
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
+            document.getElementById('feedbackModal').style.display = 'none';
+        }
+
+        function sendSuggestion() {
+            const suggestion = document.getElementById('suggestionText').value;
+            if (!suggestion.trim()) {
+                alert('Please enter your suggestion first.');
+                return;
+            }
+            const message = `Suggestion feedback: ${suggestion}`;
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
+            document.getElementById('feedbackModal').style.display = 'none';
+        }
+
+        function closeAndRemind() {
+            document.getElementById('feedbackModal').style.display = 'none';
+            setTimeout(showFeedbackModal, 300000); // Show again after 5 minutes
+        }
+
+        // Close modal when clicking the X
+        document.querySelector('.close').addEventListener('click', function() {
+            document.getElementById('feedbackModal').style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('feedbackModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>
