@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyan Educational Academy - Prototype</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .hidden { display: none; }
+        .progress-bar { height: 10px; background-color: #e53e3e; border-radius: 5px; }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Login Page -->
+    <div id="login" class="min-h-screen flex items-center justify-center">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+            <h2 class="text-2xl font-bold mb-6 text-center">Login to Gyan Academy</h2>
+            <div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Username</label>
+                    <div class="flex items-center border rounded-lg">
+                        <i class="fas fa-user p-3 text-gray-400"></i>
+                        <input type="text" id="username" class="w-full p-2 focus:outline-none" placeholder="Enter your username">
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Password</label>
+                    <div class="flex items-center border rounded-lg">
+                        <i class="fas fa-lock p-3 text-gray-400"></i>
+                        <input type="password" id="password" class="w-full p-2 focus:outline-none" placeholder="Enter your password">
+                    </div>
+                </div>
+                <button id="login-btn" class="w-full bg-red-600 text-white p-2 rounded-lg hover:bg-red-700 transition">Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Parent Dashboard -->
+    <div id="parent-dashboard" class="hidden min-h-screen p-8">
+        <h2 class="text-3xl font-bold mb-6">Parent Dashboard</h2>
+        <div id="parent-info" class="mb-6"></div>
+        <h3 class="text-2xl font-bold mb-4">Your Child's Progress</h3>
+        <div id="progress-container" class="mb-6"></div>
+        <h3 class="text-2xl font-bold mb-4">Enroll in New Courses</h3>
+        <div id="available-courses" class="mb-6"></div>
+        <h3 class="text-2xl font-bold mb-4">Enrolled Courses</h3>
+        <div id="enrolled-courses" class="mb-6"></div>
+        <h3 class="text-2xl font-bold mb-4">Upcoming Classes</h3>
+        <div id="parent-schedule" class="mb-6"></div>
+        <button id="logout-parent" class="bg-red-600 text-white p-2 rounded-lg hover:bg-red-700 transition">Logout</button>
+    </div>
+
+    <!-- Tutor Dashboard -->
+    <div id="tutor-dashboard" class="hidden min-h-screen p-8">
+        <h2 class="text-3xl font-bold mb-6">Tutor Dashboard</h2>
+        <div id="tutor-info" class="mb-6"></div>
+        <h3 class="text-2xl font-bold mb-4">Available Queries</h3>
+        <div id="queries-container" class="mb-6"></div>
+        <h3 class="text-2xl font-bold mb-4">Allocated Courses/Homes</h3>
+        <div id="allocated-courses" class="mb-6"></div>
+        <h3 class="text-2xl font-bold mb-4">Your Schedule</h3>
+        <div id="tutor-schedule" class="mb-6"></div>
+        <button id="logout-tutor" class="bg-red-600 text-white p-2 rounded-lg hover:bg-red-700 transition">Logout</button>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard" class="hidden min-h-screen p-8">
+        <h2 class="text-3xl font-bold mb-6">Admin Dashboard</h2>
+        <h3 class="text-2xl font-bold mb-4">User Management</h3>
+        <div id="user-management" class="mb-6"></div>
+        <h3 class="text-2xl font-bold mb-4">Create Query for Tutors</h3>
+        <div class="mb-6">
+            <input type="text" id="query-enquiry" class="w-full p-2 border rounded-lg mb-2" placeholder="Enquiry No">
+            <input type="text" id="query-class" class="w-full p-2 border rounded-lg mb-2" placeholder="Class">
+            <input type="text" id="query-subject" class="w-full p-2 border rounded-lg mb-2" placeholder="Subject">
+            <input type="text" id="query-fee" class="w-full p-2 border rounded-lg mb-2" placeholder="Fee">
+            <input type="text" id="query-time" class="w-full p-2 border rounded-lg mb-2" placeholder="Time">
+            <input type="text" id="query-area" class="w-full p-2 border rounded-lg mb-2" placeholder="Area">
+            <input type="text" id="query-demo" class="w-full p-2 border rounded-lg mb-2" placeholder="Demo">
+            <input type="text" id="query-share" class="w-full p-2 border rounded-lg mb-2" placeholder="Tutor Share">
+            <button id="create-query-btn" class="bg-red-600 text-white p-2 rounded-lg hover:bg-red-700 transition">Create Query</button>
+        </div>
+        <h3 class="text-2xl font-bold mb-4">Assign Tutor</h3>
+        <div class="mb-6">
+            <select id="assign-tutor" class="p-2 border rounded-lg">
+                <option value="">Select Tutor</option>
+            </select>
+            <select id="assign-course" class="p-2 border rounded-lg ml-2">
+                <option value="">Select Course/Home</option>
+            </select>
+            <button id="assign-btn" class="bg-red-600 text-white p-2 rounded-lg ml-2 hover:bg-red-700 transition">Assign</button>
+        </div>
+        <h3 class="text-2xl font-bold mb-4">Schedule Class</h3>
+        <div class="mb-6">
+            <input type="date" id="class-date" class="p-2 border rounded-lg">
+            <input type="time" id="class-time" class="p-2 border rounded-lg ml-2">
+            <select id="class-tutor" class="p-2 border rounded-lg ml-2">
+                <option value="">Select Tutor</option>
+            </select>
+            <select id="class-course" class="p-2 border rounded-lg ml-2">
+                <option value="">Select Course</option>
+            </select>
+            <button id="schedule-btn" class="bg-red-600 text-white p-2 rounded-lg ml-2 hover:bg-red-700 transition">Schedule</button>
+        </div>
+        <h3 class="text-2xl font-bold mb-4">Update Webpage Content</h3>
+        <div class="mb-6">
+            <input type="text" id="homepage-title" class="w-full p-2 border rounded-lg mb-2" placeholder="New Homepage Title">
+            <textarea id="homepage-desc" class="w-full p-2 border rounded-lg mb-2" placeholder="New Homepage Description"></textarea>
+            <button id="update-btn" class="bg-red-600 text-white p-2 rounded-lg hover:bg-red-700 transition">Update</button>
+        </div>
+        <button id="logout-admin" class="bg-red-600 text-white p-2 rounded-lg hover:bg-red-700 transition">Logout</button>
+    </div>
+
+    <script>
+        // Simulated Data
+        const users = [
+            { username: 'parent1', password: 'pass123', role: 'parent', child: 'Student1' },
+            { username: 'tutor1', password: 'pass123', role: 'tutor', courses: ['C.G. Vyapam'] },
+            { username: 'admin1', password: 'pass123', role: 'admin' }
+        ];
+        const students = [
+            { name: 'Student1', parent: 'parent1', enrolledCourses: ['C.G. Vyapam'], progress: { 'C.G. Vyapam': 75, 'SSC': 50 } }
+        ];
+        const availableCourses = ['C.G. Vyapam', 'SSC', 'Railway', 'Bank', 'CGPSC'];
+        let schedules = [
+            { tutor: 'tutor1', date: '2025-07-20', time: '10:00', student: 'Student1', course: 'C.G. Vyapam' }
+        ];
+        let queries = [
+            { id: 151, details: `# GYAN EDUCATIONAL ACADEMY SEJBHAR #\n\nENQUIRY NO - 151\nCLASS - 7TH\nSUBJECT - ALL\nFEE AS PER YOUR SKILLS\nTIME - 1 HOUR (MONDAY TO SATURDAY)\nAREA - Sejbahar Avinash City\nDEMO - FOR 2 DAYS\nTUTOR SHARE FOR 30 CLASSES\nALL TERMS AND CONDITIONS OF ACADEMY\nLET ME KNOW IF INTERESTED 👍☝`, status: 'open' },
+            { id: 152, details: `# GYAN EDUCATIONAL ACADEMY SEJBHAR #\n\nENQUIRY NO - 152\nCLASS - 9TH\nSUBJECT - ALL\nFEE AS PER YOUR SKILLS\nTIME - 1 HOUR (MONDAY TO SATURDAY)\nAREA - Sejbahar Avinash City\nDEMO - FOR 2 DAYS\nTUTOR SHARE FOR 30 CLASSES\nALL TERMS AND CONDITIONS OF ACADEMY\nLET ME KNOW IF INTERESTED 👍☝`, status: 'open' }
+        ];
+
+        // Login
+        document.getElementById('login-btn').addEventListener('click', () => {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const user = users.find(u => u.username === username && u.password === password);
+            if (user) {
+                localStorage.setItem('user', JSON.stringify(user));
+                window.location.hash = user.role;
+            } else {
+                alert('Invalid credentials!');
+            }
+        });
+
+        // Logout
+        function logout() {
+            localStorage.removeItem('user');
+            window.location.hash = '';
+        }
+        ['logout-parent', 'logout-tutor', 'logout-admin'].forEach(id => {
+            document.getElementById(id).addEventListener('click', logout);
+        });
+
+        // Router
+        function router() {
+            const hash = window.location.hash.slice(1);
+            ['login', 'parent-dashboard', 'tutor-dashboard', 'admin-dashboard'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            if (hash === 'parent') loadParentDashboard();
+            else if (hash === 'tutor') loadTutorDashboard();
+            else if (hash === 'admin') loadAdminDashboard();
+            else document.getElementById('login').classList.remove('hidden');
+        }
+        window.addEventListener('hashchange', router);
+        router();
+
+        // Parent Dashboard
+        function loadParentDashboard() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (user && user.role === 'parent') {
+                document.getElementById('parent-dashboard').classList.remove('hidden');
+                const student = students.find(s => s.parent === user.username);
+                document.getElementById('parent-info').innerHTML = `<p class="text-lg">Welcome, ${user.username}</p><p>Child: ${student.name}</p>`;
+                const progress = document.getElementById('progress-container');
+                progress.innerHTML = Object.entries(student.progress).map(([course, perc]) => `
+                    <div class="mb-4">
+                        <p>${course}</p>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="progress-bar" style="width: ${perc}%"></div>
+                        </div>
+                        <p>${perc}% Complete</p>
+                    </div>
+                `).join('');
+                const available = availableCourses.filter(c => !student.enrolledCourses.includes(c));
+                document.getElementById('available-courses').innerHTML = available.map(c => `
+                    <div class="flex justify-between items-center mb-2">
+                        <p>${c}</p>
+                        <button class="bg-red-600 text-white p-1 rounded-lg enroll-btn" data-course="${c}">Enroll</button>
+                    </div>
+                `).join('');
+                document.querySelectorAll('.enroll-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const course = btn.dataset.course;
+                        student.enrolledCourses.push(course);
+                        student.progress[course] = 0;
+                        loadParentDashboard();
+                    });
+                });
+                document.getElementById('enrolled-courses').innerHTML = student.enrolledCourses.map(c => `<p>${c}</p>`).join('');
+                document.getElementById('parent-schedule').innerHTML = schedules
+                    .filter(s => s.student === student.name)
+                    .map(s => `<p>Class on ${s.date} at ${s.time} - ${s.course}</p>`).join('');
+            }
+        }
+
+        // Tutor Dashboard
+        function loadTutorDashboard() {
+            const  user = JSON.parse(localStorage.getItem('user'));
+            if (user && user.role === 'tutor') {
+                document.getElementById('tutor-dashboard').classList.remove('hidden');
+                document.getElementById('tutor-info').innerHTML = `<p class="text-lg">Welcome, ${user.username}</p>`;
+                document.getElementById('queries-container').innerHTML = queries
+                    .filter(q => q.status === 'open')
+                    .map(q => `
+                        <div class="mb-4 p-4 bg-white rounded-lg shadow-lg">
+                            <pre>${q.details}</pre>
+                            <button class="bg-red-600 text-white p-1 rounded-lg express-interest" data-query="${q.id}">Express Interest</button>
+                        </div>
+                    `).join('');
+                document.querySelectorAll('.express-interest').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const queryId = btn.dataset.query;
+                        alert(`You have expressed interest in query ${queryId}`);
+                        const query = queries.find(q => q.id == queryId);
+                        query.status = 'assigned';
+                        query.tutor = user.username;
+                        loadTutorDashboard();
+                    });
+                });
+                document.getElementById('tutor-schedule').innerHTML = schedules
+                    .filter(s => s.tutor === user.username)
+                    .map(s => `<p>Class on ${s.date} at ${s.time} for ${s.student} - ${s.course}</p>`).join('');
+                document.getElementById('allocated-courses').innerHTML = user.courses.map(c => `<p>${c}</p>`).join('');
+            }
+        }
+
+        // Admin Dashboard
+        function loadAdminDashboard() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (user && user.role === 'admin') {
+                document.getElementById('admin-dashboard').classList.remove('hidden');
+                document.getElementById('user-management').innerHTML = `
+                    <table class="w-full border-collapse">
+                        <thead><tr><th class="border p-2">Username</th><th class="border p-2">Role</th><th class="border p-2">Action</th></tr></thead>
+                        <tbody>${users.map(u => `<tr><td class="border p-2">${u.username}</td><td class="border p-2">${u.role}</td><td class="border p-2"><button class="text-red-600 delete-user" data-username="${u.username}">Delete</button></td></tr>`).join('')}</tbody>
+                    </table>
+                `;
+                document.querySelectorAll('.delete-user').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const username = btn.dataset.username;
+                        if (confirm(`Delete ${username}?`)) {
+                            const index = users.findIndex(u => u.username === username);
+                            users.splice(index, 1);
+                            loadAdminDashboard();
+                        }
+                    });
+                });
+                const tutors = users.filter(u => u.role === 'tutor');
+                document.getElementById('assign-tutor').innerHTML = '<option value="">Select Tutor</option>' + tutors.map(t => `<option value="${t.username}">${t.username}</option>`).join('');
+                document.getElementById('assign-course').innerHTML = '<option value="">Select Course/Home</option>' + availableCourses.map(c => `<option value="${c}">${c}</option>`).join('');
+                document.getElementById('class-tutor').innerHTML = '<option value="">Select Tutor</option>' + tutors.map(t => `<option value="${t.username}">${t.username}</option>`).join('');
+                document.getElementById('class-course').innerHTML = '<option value="">Select Course</option>' + availableCourses.map(c => `<option value="${c}">${c}</option>`).join('');
+            }
+        }
+
+        // Create Query
+        document.getElementById('create-query-btn').addEventListener('click', () => {
+            const enquiry = document.getElementById('query-enquiry').value;
+            const classInfo = document.getElementById('query-class').value;
+            const subject = document.getElementById('query-subject').value;
+            const fee = document.getElementById('query-fee').value;
+            const time = document.getElementById('query-time').value;
+            const area = document.getElementById('query-area').value;
+            const demo = document.getElementById('query-demo').value;
+            const share = document.getElementById('query-share').value;
+            const details = `# GYAN EDUCATIONAL ACADEMY SEJBHAR #\n\nENQUIRY NO - ${enquiry}\nCLASS - ${classInfo}\nSUBJECT - ${subject}\nFEE - ${fee}\nTIME - ${time}\nAREA - ${area}\nDEMO - ${demo}\nTUTOR SHARE - ${share}\nALL TERMS AND CONDITIONS OF ACADEMY\nLET ME KNOW IF INTERESTED 👍☝`;
+            const newQuery = { id: queries.length + 151, details, status: 'open' };
+            queries.push(newQuery);
+            alert('Query created and notified to tutors!');
+            ['query-enquiry', 'query-class', 'query-subject', 'query-fee', 'query-time', 'query-area', 'query-demo', 'query-share'].forEach(id => {
+                document.getElementById(id).value = '';
+            });
+            loadTutorDashboard(); // Refresh tutor dashboard to show new query
+        });
+
+        // Assign Tutor
+        document.getElementById('assign-btn').addEventListener('click', () => {
+            const tutor = document.getElementById('assign-tutor').value;
+            const course = document.getElementById('assign-course').value;
+            if (tutor && course) {
+                const user = users.find(u => u.username === tutor);
+                if (!user.courses.includes(course)) {
+                    user.courses.push(course);
+                    alert(`Assigned ${course} to ${tutor}`);
+                    loadTutorDashboard();
+                }
+            }
+        });
+
+        // Schedule Class
+        document.getElementById('schedule-btn').addEventListener('click', () => {
+            const date = document.getElementById('class-date').value;
+            const time = document.getElementById('class-time').value;
+            const tutor = document.getElementById('class-tutor').value;
+            const course = document.getElementById('class-course').value;
+            if (date && time && tutor && course) {
+                schedules.push({ tutor, date, time, student: 'Student1', course });
+                alert('Class scheduled!');
+                loadTutorDashboard();
+                loadParentDashboard();
+            }
+        });
+
+        // Update Content
+        document.getElementById('update-btn').addEventListener('click', () => {
+            const title = document.getElementById('homepage-title').value;
+            const desc = document.getElementById('homepage-desc').value;
+            if (title && desc) {
+                alert(`Homepage updated!\nTitle: ${title}\nDescription: ${desc}`);
+            }
+        });
+    </script>
+</body>
+</html>

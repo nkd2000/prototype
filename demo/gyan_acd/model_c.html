@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyan Educational Academy - Excellence in Education</title>
+    <meta name="description" content="Gyan Educational Academy offers coaching for competitive exams including C.G. Vyapam, SSC, Railway, Bank, CGPSC, and more. Join us for quality education.">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gyan-red: #e53e3e;
+            --gyan-yellow: #f6e05e;
+            --gyan-dark: #2d3748;
+            --gyan-blue: #3182ce;
+            --gyan-green: #38a169;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f8fafc;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(112deg, rgba(0, 0, 0, 0.85) 0%, rgba(45, 55, 72, 0.9) 100%), url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .course-card {
+            transition: all 0.3s ease;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .subject-tab.active {
+            background-color: var(--gyan-yellow);
+            color: var(--gyan-dark);
+            font-weight: 600;
+        }
+        
+        .testimonial-card {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            transition: transform 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .floating-btn {
+            animation: pulse 2s infinite;
+        }
+        
+        .dashboard-preview {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .login-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        
+        .login-form {
+            animation: slideIn 0.4s ease-out;
+        }
+        
+        .user-type-btn.active {
+            background-color: var(--gyan-blue);
+            color: white;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #e2e8f0;
+        }
+        
+        .progress-value {
+            height: 100%;
+            border-radius: 4px;
+            background-color: var(--gyan-green);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #e53e3e 0%, #3182ce 100%);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Sticky Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-12 h-12 flex items-center justify-center mr-3">
+                            <i class="fas fa-graduation-cap text-2xl text-gray-600"></i>
+                        </div>
+                        <div>
+                            <span class="text-2xl font-bold text-red-600">GYAN</span>
+                            <span class="text-2xl font-bold text-yellow-500"> Academy</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-800 hover:text-red-600 font-medium transition">Home</a>
+                    <a href="#courses" class="text-gray-800 hover:text-red-600 font-medium transition">Courses</a>
+                    <a href="#features" class="text-gray-800 hover:text-red-600 font-medium transition">Features</a>
+                    <a href="#dashboards" class="text-gray-800 hover:text-red-600 font-medium transition">Dashboards</a>
+                    <a href="#testimonials" class="text-gray-800 hover:text-red-600 font-medium transition">Testimonials</a>
+                    <a href="#contact" class="bg-red-600 text-white px-5 py-2 rounded-lg hover:bg-red-700 transition">Enroll Now</a>
+                    <button onclick="openLoginModal()" class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition">
+                        <i class="fas fa-sign-in-alt mr-2"></i>Login
+                    </button>
+                </div>
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-800">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="lg:hidden hidden bg-white py-4">
+            <div class="px-4 space-y-3">
+                <a href="#home" class="block px-3 py-2 text-gray-800 hover:text-red-600 rounded-lg hover:bg-gray-100">Home</a>
+                <a href="#courses" class="block px-3 py-2 text-gray-800 hover:text-red-600 rounded-lg hover:bg-gray-100">Courses</a>
+                <a href="#features" class="block px-3 py-2 text-gray-800 hover:text-red-600 rounded-lg hover:bg-gray-100">Features</a>
+                <a href="#dashboards" class="block px-3 py-2 text-gray-800 hover:text-red-600 rounded-lg hover:bg-gray-100">Dashboards</a>
+                <a href="#testimonials" class="block px-3 py-2 text-gray-800 hover:text-red-600 rounded-lg hover:bg-gray-100">Testimonials</a>
+                <a href="#contact" class="block px-3 py-2 bg-red-600 text-white rounded-lg text-center">Enroll Now</a>
+                <button onclick="openLoginModal()" class="w-full text-left px-3 py-2 bg-blue-600 text-white rounded-lg">
+                    <i class="fas fa-sign-in-alt mr-2"></i>Login
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg text-white py-20 md:py-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">Empowering Students for <br><span class="text-yellow-400">Competitive Excellence</span></h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Gyan Educational Academy offers specialized coaching for all major competitive exams with comprehensive digital management systems.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#courses" class="bg-yellow-500 text-gray-900 font-bold px-8 py-4 rounded-full text-lg inline-block hover:bg-yellow-400 transform transition duration-300 hover:scale-105">
+                    Explore Courses <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+                <button onclick="openLoginModal()" class="bg-white text-blue-600 font-bold px-8 py-4 rounded-full text-lg inline-block hover:bg-gray-100 transform transition duration-300 hover:scale-105">
+                    Login Portal <i class="fas fa-sign-in-alt ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-12 gradient-bg text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-4xl font-bold mb-2">12,500+</div>
+                    <div class="text-lg">Students Trained</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold mb-2">95%</div>
+                    <div class="text-lg">Success Rate</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold mb-2">250+</div>
+                    <div class="text-lg">Expert Faculty</div>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold mb-2">15+</div>
+                    <div class="text-lg">Years Experience</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Comprehensive Course Offerings</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Prepare for top competitive exams with our specialized coaching programs</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Course Card 1 -->
+                <div class="course-card bg-white rounded-xl overflow-hidden">
+                    <div class="bg-red-600 py-6 text-center">
+                        <i class="fas fa-book text-white text-4xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">C.G. Vyapam</h3>
+                        <p class="text-gray-600 mb-4">Complete preparation for Vyapam exams with expert guidance and comprehensive study material.</p>
+                        <ul class="mb-4 text-gray-600 space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Regular mock tests</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Previous year papers analysis</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Personalized doubt sessions</span>
+                            </li>
+                        </ul>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-gray-800">₹8,500</span>
+                            <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Course Card 2 -->
+                <div class="course-card bg-white rounded-xl overflow-hidden">
+                    <div class="bg-blue-600 py-6 text-center">
+                        <i class="fas fa-file-alt text-white text-4xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">SSC & Railway</h3>
+                        <p class="text-gray-600 mb-4">Integrated program for SSC and Railway exams with specialized sections for each.</p>
+                        <ul class="mb-4 text-gray-600 space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Sectional preparation strategy</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Current affairs updates</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Speed test practice sessions</span>
+                            </li>
+                        </ul>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-gray-800">₹9,500</span>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Course Card 3 -->
+                <div class="course-card bg-white rounded-xl overflow-hidden">
+                    <div class="bg-green-600 py-6 text-center">
+                        <i class="fas fa-university text-white text-4xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-gray-800">Banking & CGPSC</h3>
+                        <p class="text-gray-600 mb-4">Comprehensive preparation for Banking and State PSC exams with interview guidance.</p>
+                        <ul class="mb-4 text-gray-600 space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Professional interview training</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Economic survey analysis</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Essay writing practice</span>
+                            </li>
+                        </ul>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-gray-800">₹12,000</span>
+                            <button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Integrated Academy Management System</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Our platform provides specialized dashboards for all stakeholders</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-md text-center">
+                    <div class="feature-icon bg-red-100 text-red-600">
+                        <i class="fas fa-user-graduate text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Parent Portal</h3>
+                    <p class="text-gray-600 mb-4">Monitor your child's progress, attendance, and performance in real-time</p>
+                    <ul class="text-left text-gray-600 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-red-600 mt-1 mr-2"></i>
+                            <span>Real-time progress tracking</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-red-600 mt-1 mr-2"></i>
+                            <span>Attendance monitoring</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-red-600 mt-1 mr-2"></i>
+                            <span>Performance analytics</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-red-600 mt-1 mr-2"></i>
+                            <span>Fee payment history</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-md text-center">
+                    <div class="feature-icon bg-blue-100 text-blue-600">
+                        <i class="fas fa-chalkboard-teacher text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Tutor Portal</h3>
+                    <p class="text-gray-600 mb-4">Manage classes, assignments, and student progress efficiently</p>
+                    <ul class="text-left text-gray-600 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-600 mt-1 mr-2"></i>
+                            <span>Class scheduling</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-600 mt-1 mr-2"></i>
+                            <span>Assignment management</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-600 mt-1 mr-2"></i>
+                            <span>Student performance reports</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-600 mt-1 mr-2"></i>
+                            <span>Resource sharing</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-md text-center">
+                    <div class="feature-icon bg-green-100 text-green-600">
+                        <i class="fas fa-user-cog text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Admin Portal</h3>
+                    <p class="text-gray-600 mb-4">Full academy management with comprehensive oversight capabilities</p>
+                    <ul class="text-left text-gray-600 space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-600 mt-1 mr-2"></i>
+                            <span>User management</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-600 mt-1 mr-2"></i>
+                            <span>Course scheduling</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-600 mt-1 mr-2"></i>
+                            <span>Financial management</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-600 mt-1 mr-2"></i>
+                            <span>Analytics dashboard</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Previews -->
+    <section id="dashboards" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Dashboard Previews</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Explore our specialized interfaces for each user type</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+                <div class="bg-gray-50 p-6 rounded-xl">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800 flex items-center">
+                        <i class="fas fa-user-graduate text-red-600 mr-3"></i>
+                        Parent Dashboard
+                    </h3>
+                    <div class="dashboard-preview bg-white p-4 rounded-lg">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16"></div>
+                            <div class="ml-4">
+                                <div class="font-bold">Rahul Sharma</div>
+                                <div class="text-gray-600 text-sm">Parent of Arjun Sharma (Class 10)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Mathematics Progress</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-value" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Science Progress</span>
+                                <span>68%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-value" style="width: 68%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between text-center">
+                            <div>
+                                <div class="text-lg font-bold">95%</div>
+                                <div class="text-sm text-gray-600">Attendance</div>
+                            </div>
+                            <div>
+                                <div class="text-lg font-bold">24/30</div>
+                                <div class="text-sm text-gray-600">Assignments</div>
+                            </div>
+                            <div>
+                                <div class="text-lg font-bold">A</div>
+                                <div class="text-sm text-gray-600">Performance</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800 flex items-center">
+                        <i class="fas fa-chalkboard-teacher text-blue-600 mr-3"></i>
+                        Tutor Dashboard
+                    </h3>
+                    <div class="dashboard-preview bg-white p-4 rounded-lg">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16"></div>
+                            <div class="ml-4">
+                                <div class="font-bold">Prof. Anjali Verma</div>
+                                <div class="text-gray-600 text-sm">Mathematics Tutor</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="font-medium mb-2">Today's Schedule</div>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between bg-blue-50 p-3 rounded-lg">
+                                    <div>
+                                        <div class="font-medium">Class 10 - Algebra</div>
+                                        <div class="text-sm text-gray-600">9:00 AM - 10:30 AM</div>
+                                    </div>
+                                    <div class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">Ongoing</div>
+                                </div>
+                                <div class="flex items-center justify-between bg-gray-50 p-3 rounded-lg">
+                                    <div>
+                                        <div class="font-medium">Class 12 - Calculus</div>
+                                        <div class="text-sm text-gray-600">11:00 AM - 12:30 PM</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <div class="font-medium mb-2">Pending Assignments</div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span>Class 10 - Trigonometry</span>
+                                <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-sm">3 pending</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-xl">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800 flex items-center">
+                        <i class="fas fa-user-cog text-green-600 mr-3"></i>
+                        Admin Dashboard
+                    </h3>
+                    <div class="dashboard-preview bg-white p-4 rounded-lg">
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="bg-red-50 p-4 rounded-lg">
+                                <div class="text-2xl font-bold">142</div>
+                                <div class="text-sm text-gray-600">Students</div>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <div class="text-2xl font-bold">18</div>
+                                <div class="text-sm text-gray-600">Faculty</div>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <div class="text-2xl font-bold">₹2.8L</div>
+                                <div class="text-sm text-gray-600">Revenue</div>
+                            </div>
+                            <div class="bg-yellow-50 p-4 rounded-lg">
+                                <div class="text-2xl font-bold">92%</div>
+                                <div class="text-sm text-gray-600">Attendance</div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="font-medium mb-2">Recent Activities</div>
+                            <div class="space-y-3 text-sm">
+                                <div class="flex items-start">
+                                    <div class="bg-green-100 text-green-800 p-1 rounded mr-2 mt-1">
+                                        <i class="fas fa-user-plus text-xs"></i>
+                                    </div>
+                                    <div>
+                                        <div>5 new students enrolled</div>
+                                        <div class="text-gray-600 text-xs">2 hours ago</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-blue-100 text-blue-800 p-1 rounded mr-2 mt-1">
+                                        <i class="fas fa-file-invoice text-xs"></i>
+                                    </div>
+                                    <div>
+                                        <div>Fee payment received from 12 students</div>
+                                        <div class="text-gray-600 text-xs">Today</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="bg-purple-100 text-purple-800 p-1 rounded mr-2 mt-1">
+                                        <i class="fas fa-calendar-alt text-xs"></i>
+                                    </div>
+                                    <div>
+                                        <div>New batch schedule created</div>
+                                        <div class="text-gray-600 text-xs">Yesterday</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Student Testimonials</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Hear from our successful students</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="testimonial-card bg-white p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16"></div>
+                        <div class="ml-4">
+                            <h4 class="font-bold">Rahul Sharma</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">"The parent dashboard helped me monitor my son's progress in real-time. The detailed analytics gave me insights I never had before!"</p>
+                    <div class="text-sm text-gray-500">Parent of Class 10 Student</div>
+                </div>
+                
+                <div class="testimonial-card bg-white p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16"></div>
+                        <div class="ml-4">
+                            <h4 class="font-bold">Anjali Verma</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">"The tutor portal has streamlined my workflow. I can now manage assignments, track student progress, and schedule classes all in one place."</p>
+                    <div class="text-sm text-gray-500">Mathematics Faculty</div>
+                </div>
+                
+                <div class="testimonial-card bg-white p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16"></div>
+                        <div class="ml-4">
+                            <h4 class="font-bold">Vikram Singh</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">"As an administrator, the dashboard gives me complete oversight of the academy's operations. The analytics have helped us improve efficiency by 40%."</p>
+                    <div class="text-sm text-gray-500">Academy Administrator</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gradient-to-r from-red-600 to-blue-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Educational Journey?</h2>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">Join thousands of successful students who have achieved their dreams with Gyan Academy</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#contact" class="bg-white text-gray-900 font-bold px-8 py-4 rounded-full text-lg inline-block hover:bg-gray-100 transform transition duration-300 hover:scale-105">
+                    Enroll Now <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+                <button onclick="openLoginModal()" class="bg-transparent border-2 border-white text-white font-bold px-8 py-4 rounded-full text-lg hover:bg-white hover:text-gray-900 transform transition duration-300 hover:scale-105">
+                    View Demo <i class="fas fa-laptop ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">
+                        <span class="text-red-600">GYAN</span>
+                        <span class="text-yellow-500">Academy</span>
+                    </h3>
+                    <p class="mb-4 text-gray-300">Your premier destination for competitive exam preparation and academic excellence.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-300 hover:text-white">Home</a></li>
+                        <li><a href="#courses" class="text-gray-300 hover:text-white">Courses</a></li>
+                        <li><a href="#features" class="text-gray-300 hover:text-white">Features</a></li>
+                        <li><a href="#dashboards" class="text-gray-300 hover:text-white">Dashboards</a></li>
+                        <li><a href="#testimonials" class="text-gray-300 hover:text-white">Testimonials</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Contact Info</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-yellow-500"></i>
+                            <span>123 Education Street, Academic Nagar, Raipur, CG 492001</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3 text-yellow-500"></i>
+                            <span>+91 98765 43210</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-yellow-500"></i>
+                            <span>info@gyanacademy.com</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Newsletter</h4>
+                    <p class="mb-4 text-gray-300">Subscribe to get updates on courses and educational tips</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 w-full rounded-l-lg focus:outline-none text-gray-800">
+                        <button class="bg-yellow-500 text-gray-900 px-4 py-2 rounded-r-lg font-bold">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 text-center text-gray-400">
+                <p>&copy; 2023 Gyan Educational Academy. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Buttons -->
+    <a href="https://wa.me/919876543210" target="_blank" class="floating-btn fixed bottom-6 right-6 bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+
+    <button id="back-to-top" class="fixed bottom-24 right-6 bg-red-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="login-modal">
+        <div class="flex items-center justify-center min-h-screen">
+            <div class="login-form bg-white rounded-xl w-full max-w-md mx-4 p-8 relative">
+                <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+                
+                <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">
+                    <span class="text-red-600">GYAN</span>
+                    <span class="text-yellow-500">Login</span>
+                </h2>
+                
+                <div class="flex justify-center mb-6">
+                    <div class="flex bg-gray-100 rounded-lg p-1">
+                        <button onclick="setUserType('parent')" class="user-type-btn py-2 px-6 rounded-lg" id="parent-btn">Parent</button>
+                        <button onclick="setUserType('tutor')" class="user-type-btn py-2 px-6 rounded-lg" id="tutor-btn">Tutor</button>
+                        <button onclick="setUserType('admin')" class="user-type-btn py-2 px-6 rounded-lg" id="admin-btn">Admin</button>
+                    </div>
+                </div>
+                
+                <form id="login-form" class="space-y-6">
+                    <div>
+                        <label class="block text-gray-700 mb-2" for="username">Username</label>
+                        <input type="text" id="username" class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Enter your username">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-700 mb-2" for="password">Password</label>
+                        <input type="password" id="password" class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Enter your password">
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="remember" class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded">
+                            <label for="remember" class="ml-2 block text-sm text-gray-700">Remember me</label>
+                        </div>
+                        <a href="#" class="text-sm text-red-600 hover:text-red-800">Forgot password?</a>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-red-600 text-white py-3 rounded-lg font-bold hover:bg-red-700 transition">Login to Dashboard</button>
+                    
+                    <div class="text-center mt-4">
+                        <p class="text-gray-600">Don't have an account? <a href="#" class="text-red-600 hover:text-red-800">Contact Admin</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Login Modal Functions
+        function openLoginModal() {
+            document.getElementById('login-modal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            setUserType('parent');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('login-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function setUserType(type) {
+            // Remove active class from all buttons
+            document.getElementById('parent-btn').classList.remove('active');
+            document.getElementById('tutor-btn').classList.remove('active');
+            document.getElementById('admin-btn').classList.remove('active');
+            
+            // Add active class to selected button
+            document.getElementById(`${type}-btn`).classList.add('active');
+            
+            // Update form based on user type
+            const form = document.getElementById('login-form');
+            if (type === 'parent') {
+                document.getElementById('username').placeholder = "Parent ID or Email";
+            } else if (type === 'tutor') {
+                document.getElementById('username').placeholder = "Tutor ID or Email";
+            } else {
+                document.getElementById('username').placeholder = "Admin Username";
+            }
+        }
+
+        // Handle form submission
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple validation
+            if (username && password) {
+                // In a real app, this would be an API call
+                alert(`Login successful! Redirecting to dashboard...`);
+                closeLoginModal();
+            } else {
+                alert('Please enter both username and password');
+            }
+        });
+
+        // Back to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('hidden');
+            } else {
+                backToTopButton.classList.add('hidden');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
