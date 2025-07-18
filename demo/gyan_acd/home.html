@@ -88,33 +88,69 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
-        .tour-box h2 {
-            color: #2563eb;
-            margin-bottom: 15px;
-            font-size: 1.5rem;
+        .tour-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 20px;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .tour-header i {
+            font-size: 2rem;
+            color: #60a5fa;
+        }
+
+        .tour-header h2 {
+            color: white;
+            margin: 0;
+        }
+
+        .tour-steps {
+            padding: 20px;
         }
 
         .tour-step {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 15px;
-            padding: 15px;
             background: #f8fafc;
-            border-radius: 8px;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .tour-step:hover {
+            transform: translateX(10px);
+            background: #f0f9ff;
         }
 
         .step-number {
-            background: #2563eb;
+            background: linear-gradient(135deg, #2563eb, #1e40af);
             color: white;
-            width: 28px;
-            height: 28px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 15px;
-            flex-shrink: 0;
             font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            color: #1e40af;
+            margin: 0 0 8px 0;
+            font-size: 1.2rem;
+        }
+
+        .step-content p {
+            color: #64748b;
+            margin: 0;
+            line-height: 1.5;
         }
 
         /* Models Grid */
@@ -378,26 +414,71 @@
             <i>सभी मॉडेल को एक एक करके चेक करे जो भी मॉडेल आपको पसंद आए अपने लिए तो उसका लिंक हमे मैसेज करे।</i></p>
         </div>
 
-        <!-- Tour Box -->
-        <div class="tour-box">
-            <h2>How to Use This Site</h2>
-            <div class="tour-step">
-                <div class="step-number">1</div>
-                <div>Browse through our three prototype models (A, B, and C). Each model has different features and layouts.</div>
+        <!-- Tour Box (hidden, shown as alert on page load) -->
+        <div class="tour-box" id="tourBox">
+            <div class="tour-header">
+                <i class="fas fa-map-marked-alt"></i>
+                <h2>How to Use This Site</h2>
             </div>
-            <div class="tour-step">
-                <div class="step-number">2</div>
-                <div>Click on "Go to Model" buttons to preview each design in detail and explore their unique features.</div>
-            </div>
-            <div class="tour-step">
-                <div class="step-number">3</div>
-                <div>Use the navigation menus within each model to explore different sections like courses, subjects, and contact information.</div>
-            </div>
-            <div class="tour-step">
-                <div class="step-number">4</div>
-                <div>Once you find a model you like, copy its link and send it to us as mentioned in the note above.</div>
+            <div class="tour-steps">
+                <div class="tour-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Browse Models</h3>
+                        <p>Explore our four prototype models (A, B, C, and D). Each model offers unique features and layouts tailored for educational institutions.</p>
+                    </div>
+                </div>
+                <div class="tour-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Preview Designs</h3>
+                        <p>Click on "Preview Model" buttons to experience each design in detail and explore their unique features.</p>
+                    </div>
+                </div>
+                <div class="tour-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Explore Features</h3>
+                        <p>Navigate through different sections like courses, subjects, and contact information to understand the full capabilities.</p>
+                    </div>
+                </div>
+                <div class="tour-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Select & Share</h3>
+                        <p>Once you find your preferred model, copy its link and send it to us as mentioned in the note above.</p>
+                    </div>
+                </div>
             </div>
         </div>
+        <script>
+            window.addEventListener('DOMContentLoaded', function() {
+                const message = `
+🎯 Welcome to Prototype Models! 
+
+Here's your quick guide:
+
+1. 🔍 Browse Models
+   Browse through our four prototype models (A-D)
+   
+2. 👁️ Preview Designs
+   Use "Preview Model" buttons to explore features
+   
+3. 🗺️ Navigate Features
+   Check different sections in each model
+   
+4. ✅ Make Your Choice
+   Select your favorite and share the link
+
+Ready to start exploring? Click OK to begin!
+                `;
+                
+                alert(message);
+                
+                // Show the tour box after alert
+                document.getElementById('tourBox').style.display = 'block';
+            });
+        </script>
 
         <!-- Models Grid -->
         <h1 style="margin: 25px 0 10px; color: #1e293b;">Available Prototypes</h1>
@@ -478,83 +559,59 @@
                     <button class="option-btn" onclick="closeAndRemind()" style="background: #64748b;">
                         <i class="fas fa-clock"></i> बाद में
                     </button>
-                </div>
-
-                <div id="modelSelection" class="feedback-form">
-                    <h3 style="margin-bottom: 15px;">कृपया एक मॉडल चुनें:</h3>
-                    <select id="modelChoice" class="feedback-input">
+                </div>                <div id="suggestionForm" class="feedback-form">
+="margin-bottom: 15px;">अपना सुझाव यहां लिखें:</h3>
+                <div id="modelSelection" class="feedback-form">input" placeholder="Type your suggestion here..."></textarea>
+                    <h3 style="margin-bottom: 15px;">कृपया एक मॉडल चुनें:</h3>sendSuggestion()">
+                    <select id="modelChoice" class="feedback-input">as fa-paper-plane"></i> सुझाव भेजें
                         <option value="Model A">Model A</option>
-                        <option value="Model B">Model B</option>
-                        <option value="Model C">Model C</option>
+                        <option value="Model B">Model B</option>n-btn" onclick="showMainOptions()" style="background: #64748b;">
+                        <option value="Model C">Model C</option>        <i class="fas fa-arrow-left"></i> वापस जाएं
                     </select>
                     <button class="option-btn" onclick="sendModelChoice()">
-                        <i class="fas fa-paper-plane"></i> भेजें
+                        <i class="fas fa-paper-plane"></i> भेजेंv>
                     </button>
                     <button class="option-btn" onclick="showMainOptions()" style="background: #64748b;">
                         <i class="fas fa-arrow-left"></i> वापस जाएं
-                    </button>
-                </div>
-
-                <div id="suggestionForm" class="feedback-form">
-                    <h3 style="margin-bottom: 15px;">अपना सुझाव यहां लिखें:</h3>
-                    <textarea id="suggestionText" class="feedback-input" placeholder="Type your suggestion here..."></textarea>
-                    <button class="option-btn" onclick="sendSuggestion()">
-                        <i class="fas fa-paper-plane"></i> सुझाव भेजें
-                    </button>
-                    <button class="option-btn" onclick="showMainOptions()" style="background: #64748b;">
-                        <i class="fas fa-arrow-left"></i> वापस जाएं
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
+                    </button>->
+                </div>ss="footer">
+v class="container">
             <p>© 2023 Prototype Models. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        let visitedModels = new Set();
-        const whatsappNumber = "+916261225135";
-
         // Track model visits
         document.querySelectorAll('.model-link').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-                const href = this.getAttribute('href');
-                visitedModels.add(href);
+                const href = this.getAttribute('href');w Set();
+                visitedModels.add(href);onst whatsappNumber = "+916261225135";
                 
                 // Open model in new tab
                 window.open(href, '_blank');
                 
                 // Show feedback modal if all models visited
-                if (visitedModels.size === 3) {
-                    setTimeout(showFeedbackModal, 1000);
+                if (visitedModels.size === 3) {       const href = this.getAttribute('href');
+                    setTimeout(showFeedbackModal, 1000);                visitedModels.add(href);
                 }
             });
         });
-
-        // Modal Functions
-        function showFeedbackModal() {
+       
+        // Modal Functions                // Show feedback modal if all models visited
+        function showFeedbackModal() {=== 3) {
             const modal = document.getElementById('feedbackModal');
             modal.style.display = 'flex';
             showMainOptions();
-        }
+        });
 
         function showMainOptions() {
             document.getElementById('mainOptions').style.display = 'block';
             document.getElementById('modelSelection').style.display = 'none';
             document.getElementById('suggestionForm').style.display = 'none';
-        }
+        }ns();
 
         function showModelSelection() {
-            document.getElementById('mainOptions').style.display = 'none';
+            document.getElementById('mainOptions').style.display = 'none';{
             document.getElementById('modelSelection').style.display = 'block';
-        }
-
+        }modelSelection').style.display = 'none';
+isplay = 'none';
         function showSuggestionForm() {
             document.getElementById('mainOptions').style.display = 'none';
             document.getElementById('suggestionForm').style.display = 'block';
@@ -576,6 +633,50 @@
             }
             const message = `Suggestion feedback: ${suggestion}`;
             window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
+            closeModal();
+        }
+
+        function closeAndRemind() {
+            closeModal();
+            setTimeout(showFeedbackModal, 300000); // Show again after 5 minutes
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html></body>    </script>        });            }                closeModal();            if (event.target === modal) {            const modal = document.getElementById('feedbackModal');        window.addEventListener('click', function(event) {                document.querySelector('.close').addEventListener('click', closeModal);        // Event Listeners        }            document.getElementById('feedbackModal').style.display = 'none';        function closeModal() {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html></body>    </script>        });            }                closeModal();            if (event.target === modal) {            const modal = document.getElementById('feedbackModal');        window.addEventListener('click', function(event) {        // Close modal on outside click        }            visitedModels.clear(); // Reset visited models            modal.style.display = 'none';            const modal = document.getElementById('feedbackModal');        function closeModal() {        }            closeModal();            window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');            const message = `Suggestion feedback: ${suggestion}`;            }                return;                alert('Please enter your suggestion first.');            if (!suggestion.trim()) {            const suggestion = document.getElementById('suggestionText').value;        function sendSuggestion() {        }            closeModal();            window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');            const message = `Hello, I would like to order ${model} for my website.`;            const model = document.getElementById('modelChoice').value;        function sendModelChoice() {        }            document.getElementById('suggestionText').focus();            document.getElementById('suggestionForm').style.display = 'block';            document.getElementById('mainOptions').style.display = 'none';        function showSuggestionForm() {        }            document.getElementById('modelSelection').style.display = 'block';            document.getElementById('mainOptions').style.display = 'none';            window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
             closeModal();
         }
 
