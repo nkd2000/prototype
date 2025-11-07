@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>प्रोफेशनल PC अपग्रेड पैकेज - शानदार अनुभव</title>
+
+<!-- Google Font 'Inter' for a modern, clean tech feel -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  /* --- Pro-Level Color Palette --- */
+  --bg-dark: #111827;      /* Deep navy background */
+  --bg-card: #1F2937;      /* Lighter navy for cards */
+  --accent-blue: #3b82f6;   /* Vibrant, modern blue */
+  --accent-glow: 0 0 25px #3b82f660; /* Subtle glow for hover */
+  --pro-gradient: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+  --text-light: #F9FAFB;   /* Clean off-white for headings */
+  --text-muted: #9CA3AF;   /* Gray for subtext and specs */
+  --border-color: #374151; /* Subtle border for cards/tables */
+  --brand-whatsapp: #25D366; /* Official WhatsApp Green */
+
+  /* --- Badge Colors --- */
+  --badge-budget-bg: #F59E0B1A;
+  --badge-budget-text: #F59E0B;
+  --badge-premium-bg: #10B9811A;
+  --badge-premium-text: #10B981;
+  --badge-zoom-bg: #6366F11A;
+  --badge-zoom-text: #6366F1;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-muted);
+  font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem; /* 24px */
+}
+
+header {
+  background: var(--pro-gradient);
+  padding: 4rem 1.5rem 3rem 1.5rem; /* 64px 24px 48px */
+  text-align: center;
+  box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.2);
+}
+
+header h1 {
+  font-size: 2.5rem; /* 40px */
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: #fff;
+  margin-bottom: 0.75rem; /* 12px */
+}
+
+header p {
+  font-size: 1.125rem; /* 18px */
+  color: #E0E7FF;
+  font-weight: 500;
+  max-width: 650px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+.packages {
+  display: grid;
+  /* Responsive grid: 1 column on mobile, 2 on tablet, 3 on desktop */
+  grid-template-columns: 1fr;
+  gap: 2rem; /* 32px */
+  margin: 3rem 0; /* 48px */
+}
+
+/* Tablet and Desktop Grid */
+@media (min-width: 768px) {
+  .packages {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .packages {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.package {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem; /* 16px */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  padding: 2rem; /* 32px */
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.package:hover {
+  transform: translateY(-8px);
+  border-color: var(--accent-blue);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1), var(--accent-glow);
+}
+
+.package h2 {
+  font-size: 1.5rem; /* 24px */
+  font-weight: 700;
+  margin-bottom: 0.75rem; /* 12px */
+  color: var(--text-light);
+}
+
+.badge {
+  font-weight: 700;
+  margin-bottom: 1rem; /* 16px */
+  padding: 0.375rem 0.875rem; /* 6px 14px */
+  border-radius: 9999px; /* Pill shape */
+  font-size: 0.875rem; /* 14px */
+  align-self: flex-start; /* Only be as wide as its content */
+  letter-spacing: 0.5px;
+}
+
+/* --- Pro-level pill-style badges --- */
+.budget { background-color: var(--badge-budget-bg); color: var(--badge-budget-text); }
+.premium { background-color: var(--badge-premium-bg); color: var(--badge-premium-text); }
+.zoom { background-color: var(--badge-zoom-bg); color: var(--badge-zoom-text); }
+
+.price-container {
+  margin: 0.5rem 0 1.5rem 0; /* 8px 0 24px */
+}
+
+.price {
+  font-size: 2.25rem; /* 36px */
+  font-weight: 800;
+  color: var(--text-light);
+  display: inline;
+}
+
+.price-range {
+  font-size: 1rem; /* 16px */
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-left: 0.25rem; /* 4px */
+}
+
+.specs {
+  font-size: 1rem; /* 16px */
+  line-height: 1.75;
+  margin-bottom: 1.5rem; /* 24px */
+  list-style: none;
+  padding-left: 0;
+  /* Pushes button to bottom */
+  flex-grow: 1;
+}
+
+.specs li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem; /* 12px */
+  margin-bottom: 0.625rem; /* 10px */
+}
+
+/* Checkmark icon for specs */
+.specs li::before {
+  content: '✓';
+  color: var(--accent-blue);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.btn {
+  background: var(--pro-gradient);
+  color: #fff;
+  padding: 1rem 1.5rem; /* 16px 24px */
+  border: none;
+  font-size: 1rem; /* 16px */
+  border-radius: 0.75rem; /* 12px */
+  font-weight: 700;
+  margin-top: auto; /* Pushes to bottom */
+  box-shadow: 0 4px 15px -3px rgba(59, 130, 246, 0.4);
+  cursor: pointer;
+  transition: all 0.23s ease;
+  text-align: center;
+  width: 100%; /* Full width for easy tapping */
+}
+
+.btn:hover {
+  opacity: 0.9;
+  box-shadow: 0 6px 20px -3px rgba(59, 130, 246, 0.6);
+  transform: translateY(-2px);
+}
+
+.asset-block {
+  background: var(--bg-card);
+  border-left: 5px solid var(--accent-blue);
+  border-radius: 0.75rem; /* 12px */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem 2rem; /* 24px 32px */
+  margin: 3rem 0; /* 48px 0 */
+}
+
+.asset-block b {
+  color: var(--text-light);
+  font-size: 1.125rem; /* 18px */
+  font-weight: 700;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.asset-block ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 1rem 0;
+}
+.asset-block li {
+  margin-bottom: 0.5rem; /* 8px */
+}
+.asset-block a {
+  color: var(--accent-blue);
+  text-decoration: none;
+  font-weight: 500;
+}
+.asset-block a:hover {
+  text-decoration: underline;
+}
+
+.asset-block .note {
+  color: var(--text-muted);
+  font-size: 1rem; /* 16px */
+  font-style: italic;
+}
+
+/* Container to make table responsive */
+.table-container {
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem; /* 12px */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.comparison-table {
+  width: 100%;
+  font-size: 1rem; /* 16px */
+  border-collapse: collapse;
+  min-width: 600px; /* Force scroll on small screens */
+}
+
+.comparison-table th,
+.comparison-table td {
+  border: 1px solid var(--border-color);
+  padding: 1rem 1.25rem; /* 16px 20px */
+  text-align: center;
+  background: var(--bg-card);
+}
+
+.comparison-table th {
+  background: #2b3a50; /* Slightly darker header */
+  color: var(--text-light);
+  font-weight: 700;
+  font-size: 0.875rem; /* 14px */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Left-align the feature column */
+.comparison-table th:first-child,
+.comparison-table td:first-child {
+  text-align: left;
+  font-weight: 500;
+  color: var(--text-light);
+}
+
+.comparison-table tr:nth-child(even) td {
+  background: #243041; /* Stripe effect */
+}
+
+.final-note {
+  margin: 1.5rem 0 0 0; /* 24px */
+  font-size: 1rem; /* 16px */
+  color: var(--text-muted);
+  font-style: italic;
+}
+.final-note b {
+  color: var(--text-light);
+  font-weight: 700;
+}
+
+.footer {
+  background: var(--bg-card);
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 3rem; /* 48px */
+  padding: 2.5rem 1.5rem; /* 40px 24px */
+  border-top: 1px solid var(--border-color);
+}
+.footer p {
+  font-size: 1.125rem; /* 18px */
+  font-weight: 500;
+}
+.footer a {
+  color: var(--accent-blue);
+  text-decoration: none;
+  font-weight: 700;
+}
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 1.5rem; /* 24px */
+  right: 1.5rem; /* 24px */
+  background: var(--brand-whatsapp);
+  color: #fff;
+  border-radius: 50px;
+  padding: 0.75rem 1.25rem; /* 12px 20px */
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem; /* 16px */
+  box-shadow: 0 8px 20px -5px rgba(37, 211, 102, 0.5);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* 8px */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.whatsapp-float svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px -5px rgba(37, 211, 102, 0.7);
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 767px) {
+  .container {
+    padding: 0 1rem; /* 16px */
+  }
+  
+  header {
+    padding: 3rem 1.5rem 2rem 1.5rem;
+  }
+  
+  header h1 {
+    font-size: 2rem; /* 32px */
+  }
+
+  header p {
+    font-size: 1rem; /* 16px */
+  }
+  
+  .packages {
+    margin: 2rem 0; /* 32px */
+    gap: 1.5rem; /* 24px */
+  }
+
+  .package {
+    padding: 1.5rem; /* 24px */
+  }
+
+  .package h2 {
+    font-size: 1.25rem; /* 20px */
+  }
+
+  .price {
+    font-size: 2rem; /* 32px */
+  }
+
+  .price-range {
+    font-size: 0.875rem; /* 14px */
+  }
+
+  .asset-block {
+    padding: 1.5rem;
+  }
+
+  .whatsapp-float span {
+    /* Hide text on very small screens if needed, but modern phones are wide enough */
+    /* display: none; */
+  }
+}
+
+</style>
+</head>
+<body>
+
+<header>
+  <h1>प्रोफेशनल PC अपग्रेड पैकेज</h1>
+  <p>अपने पुराने PC को बनाएँ सुपरफास्ट और मॉडर्न! Zoom, वीडियो कॉल, और Windows 11 का शानदार अनुभव पाएँ।</p>
+</header>
+
+<div class="container">
+
+  <section class="packages">
+    <!-- Package 1: Budget -->
+    <div class="package">
+      <span class="badge budget">स्टार्टर पैक</span>
+      <h2>4GB RAM + 128GB SSD</h2>
+      <div class="price-container">
+        <div class="price">₹2,500</div>
+        <span class="price-range">-3,800*</span>
+      </div>
+      <ul class="specs">
+        <li>Basic browsing, ऑफिस, study</li>
+        <li>Windows 10, External 465GB HDD</li>
+        <li>बूट टाइम ~15 सेकंड</li>
+        <li>HD video call लिमिटेड</li>
+      </ul>
+      <button class="btn" onclick="sendWhatsApp('स्टार्टर पैक (4GB+128GB)')">यह Plan चाहिए</button>
+    </div>
+
+    <!-- Package 2: Premium -->
+    <div class="package">
+      <span class="badge premium">मल्टी-टास्किंग प्रो</span>
+      <h2>12GB RAM (4+8) + 512GB SSD</h2>
+      <div class="price-container">
+        <div class="price">₹6,800</div>
+        <span class="price-range">-10,500*</span>
+      </div>
+      <ul class="specs">
+        <li>Fast browsing, multitasking</li>
+        <li>Windows 10/11, External HDD</li>
+        <li>बूट टाइम ~8 सेकंड</li>
+        <li>Zoom/Meet HD calls आसानी से</li>
+        <li>6-8 टैब + वीडियो कॉल में भी no lag</li>
+      </ul>
+      <button class="btn" onclick="sendWhatsApp('मल्टी-टास्किंग प्रो (12GB+512GB)')">यह Plan चाहिए</button>
+    </div>
+
+    <!-- Package 3: Zoom Ready / Ultimate -->
+    <div class="package">
+      <span class="badge zoom">अल्टीमेट परफॉरमेंस</span>
+      <h2>12GB RAM + 512GB SSD + Win11</h2>
+      <div class="price-container">
+        <div class="price">₹9,300</div>
+        <span class="price-range">-13,500*</span>
+      </div>
+      <ul class="specs">
+        <li>Windows 11 original key</li>
+        <li>Ultimate smooth browsing</li>
+        <li>HD video call, Zoom, Teams सब ultra smooth</li>
+        <li>Future proof (5+ साल की speed)</li>
+      </ul>
+      <button class="btn" onclick="sendWhatsApp('अल्टीमेट परफॉरमेंस (12GB+512GB+Win11)')">यह Plan चाहिए</button>
+    </div>
+  </section>
+
+  <!-- Transparency Block -->
+  <div class="asset-block">
+    <b>पूरी पारदर्शिता (Transparent Hardware)</b>
+    <ul style="font-size:1.05em;">
+      <li>8GB DDR4 Laptop RAM - <a href="https://www.amazon.in/s?k=8GB+DDR4+laptop+ram" target="_blank" rel="noopener">Amazon पर देखें</a></li>
+      <li>4GB DDR4 Laptop RAM - <a href="https://www.amazon.in/s?k=4GB+DDR4+laptop+ram" target="_blank" rel="noopener">Amazon पर देखें</a></li>
+      <li>512GB SATA SSD (2.5") - <a href="https://www.amazon.in/s?k=512gb+sata+ssd+laptop" target="_blank" rel="noopener">Amazon पर देखें</a></li>
+      <li>128GB SATA SSD (2.5") - <a href="https://www.amazon.in/s?k=128gb+sata+ssd+laptop" target="_blank" rel="noopener">Amazon पर देखें</a></li>
+      <li>External HDD Enclosure - <a href="https://www.amazon.in/s?k=2.5+inch+hdd+enclosure" target="_blank" rel="noopener">Amazon पर देखें</a></li>
+      <li>Windows 11 Pro Official Key - <a href="https://www.microsoft.com/store/productid/dg7gmgf0dv7h" target="_blank" rel="noopener">Microsoft Store</a></li>
+    </ul>
+    <span class="note">→ कस्टमर खुद latest products की price/quality और reviews देख सकते हैं। Satisfy होने के बाद आपसे WhatsApp से contact करें!</span>
+  </div>
+
+  <!-- Comparison Table -->
+  <div class="table-container">
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>स्टार्टर पैक</th>
+          <th>मल्टी-टास्किंग प्रो</th>
+          <th>अल्टीमेट परफॉरमेंस</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>RAM</td><td>4GB</td><td>12GB (4+8)</td><td>12GB</td></tr>
+        <tr><td>SSD Storage</td><td>128GB</td><td>512GB</td><td>512GB</td></tr>
+        <tr><td>Windows 11</td><td>❌</td><td>Optional</td><td>✓</td></tr>
+        <tr><td>Boot Time</td><td>~15 sec</td><td>~8 sec</td><td>~8 sec</td></tr>
+        <tr><td>Smooth Browsing</td><td>ठीक</td><td>बहुत smooth</td><td>Ultimate</td></tr>
+        <tr><td>HD Video Call</td><td>लिमिटेड</td><td>Good</td><td>Best</td></tr>
+        <tr><td>Final Price*</td><td>₹2,500-3,800</td><td>₹6,800-10,500</td><td>₹9,300-13,500</td></tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="final-note">
+    <b>Note:</b> सबसे बेहतर टेक्नोलॉजी फील, बार-बार चेक करने पर भी सभी लिंक live रहेंगे – कस्टमर और आप, दोनों बिलकुल sure होकर खरीद सकते हैं।
+  </div>
+
+</div> <!-- .container ends -->
+
+<footer class="footer">
+  <p>अगर कोई Pack पसंद है, <b>WhatsApp करें:</b> <a href="https://wa.me/916261225135?text=Hi,%20PC%20upgrade%20में%20interest%20है">6261225135</a></p>
+</footer>
+
+<!-- Floating WhatsApp Button with Icon -->
+<a class="whatsapp-float" href="https://wa.me/916261225135?text=Hi,%20PC%20upgrade%20में%20interest%20है" target="_blank" rel="noopener">
+  <!-- Inline SVG for WhatsApp Icon -->
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224-99.6 224-222 0-59.3-25.2-115-67.1-157zm-157 .2c101.2 0 183.3 82.1 183.3 183.3 0 32.7-8.6 64.3-24.8 92.4l-16.4 19.4-20.6 6.1 94.4 24.8-25.8-92.4-18.7-15.9c-26.4-15.1-55.6-23.1-86.4-23.1-101.2 0-183.3-82.1-183.3-183.3s82.1-183.3 183.3-183.3zM223.9 150c-12.7 0-23.1 10.3-23.1 23.1 0 12.7 10.3 23.1 23.1 23.1 12.7 0 23.1-10.3 23.1-23.1 0-12.8-10.4-23.1-23.1-23.1zm-46.1 86.9c-14.7-14.7-33.6-21.9-57.2-21.9-22.3 0-42.5 6.6-59.4 19.8-14.7 11.8-23.1 27-23.1 43.6 0 25.3 14.7 47.5 38.2 59.4 11.8 5.8 24.8 8.6 37.9 8.6 23.6 0 44.8-7.2 60.9-21.9 14.7-13.2 21.9-30.1 21.9-50.2 0-20.1-7.2-37.9-21.9-52.2zM320.1 300.1c-14.7-14.7-33.6-21.9-57.2-21.9-22.3 0-42.5 6.6-59.4 19.8-14.7 11.8-23.1 27-23.1 43.6 0 25.3 14.7 47.5 38.2 59.4 11.8 5.8 24.8 8.6 37.9 8.6 23.6 0 44.8-7.2 60.9-21.9 14.7-13.2 21.9-30.1 21.9-50.2 0-20.1-7.2-37.9-21.9-52.2z"/></svg>
+  <span>WhatsApp करें</span>
+</a>
+
+<script>
+function sendWhatsApp(plan){
+  // Add a specific identifier to the plan name for clarity
+  let msg = "नमस्ते, मुझे आपके '" + plan + "' वाले PC upgrade plan में interest है। क्या आप मुझे Details भेज सकते हैं?";
+  window.open("https://wa.me/916261225135?text=" + encodeURIComponent(msg), "_blank");
+}
+</script>
+
+</body>
+</html>
